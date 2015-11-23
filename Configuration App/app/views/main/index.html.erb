@@ -1,0 +1,31 @@
+<%=form_tag("/main/save_credentials", method: "get") do%>
+    <select id="ssid" name="ap_info">
+        <%for ap in @wifi_ap_hash do%>
+            <option value='<%=ap[:ssid]%>+<%=ap[:encryption_type]%>'><%=ap[:ssid]%></option>
+        <%end%>
+    </select>
+    
+    <%=label_tag(:wifi_key, "Wifi Password: ")%>
+    <%=text_field_tag(:wifi_key)%>
+    
+    <%=label_tag(:username, "Username: ")%>
+    <%=text_field_tag(:username)%>
+    
+    <%=label_tag(:password, "Password: ")%>
+    <%=text_field_tag(:password)%>
+    
+    <%=submit_tag("Connect")%>
+<%end%>
+
+<h2>Current Values<h2>
+
+<ul>
+    <li>SSID = <%=@current_values[0]%></li>
+    <li>PSK  = <%=@current_values[1]%> *Hide this in final</li>
+    <li>User = <%=@current_values[2]%></li>
+    <li>Pass = <%=@current_values[3]%> *Hide this in final</li>
+</ul>
+
+<%=form_tag("/main/reset_all", method: "get") do%>
+    <%=submit_tag("RESET DEVICE")%>
+<%end%>
