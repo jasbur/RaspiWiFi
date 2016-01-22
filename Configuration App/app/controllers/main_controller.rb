@@ -13,7 +13,7 @@ class MainController < ApplicationController
         Main.create_wpa_supplicant(ssid, encryption_type, params[:wifi_key])
       end
 
-      if File.exist?('/etc/wpa_supplicant/wpa_supplicant.conf') and File.exist?('/home/pi/user_data/user_credentials')
+      if File.exist?('/etc/wpa_supplicant/wpa_supplicant.conf')
         Main.set_ap_client_mode
       end
     end
