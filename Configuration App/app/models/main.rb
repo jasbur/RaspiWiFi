@@ -59,22 +59,6 @@ class Main < ActiveRecord::Base
       current_values << ''
     end
 
-    if File.exist?('/home/pi/user_data/user_credentials')
-      user_credential_file = File.open('/home/pi/user_data/user_credentials', 'r')
-
-      user_credential_file.each{|line|
-        if line.include?('username=')
-            current_values << line.split('=')[1].chomp
-        elsif line.include?('password=')
-            current_values << line.split('=')[1].chomp
-        end
-      }
-
-      user_credential_file.close
-    else
-        current_values << ''
-    end
-
     current_values
 	end
 

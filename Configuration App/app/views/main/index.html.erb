@@ -20,10 +20,9 @@
 <h2>Current Values<h2>
 
 <ul>
-  <li>SSID = <%=@current_values[0]%></li>
-  <li>PSK  = <%=@current_values[1]%> *Hide this in final</li>
-  <li>User = <%=@current_values[2]%></li>
-  <li>Pass = <%=@current_values[3]%> *Hide this in final</li>
+  <%for current_value in @current_values%>
+    <li><%=current_value%></li>
+  <%end%>
 </ul>
 
 <%=form_tag("/main/reset_all", method: "get") do%>
