@@ -63,7 +63,7 @@ class Main < ActiveRecord::Base
 	end
 
   def self.create_wpa_supplicant(user_ssid, encryption_type, user_wifi_key)
-		temp_conf_file = File.new('/home/pi/tmp/wpa_supplicant.conf.tmp', 'w')
+		temp_conf_file = File.new('../tmp/wpa_supplicant.conf.tmp', 'w')
 
     if encryption_type == 'WPA2'
       temp_conf_file.puts 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev'
@@ -91,8 +91,8 @@ class Main < ActiveRecord::Base
 
 		temp_conf_file.close
 
-		system('sudo cp -r /home/pi/tmp/wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
-		system('rm /home/pi/tmp/wpa_supplicant.conf.tmp')
+		system('sudo cp -r ../tmp/wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
+		system('rm ../tmp/wpa_supplicant.conf.tmp')
 	end
 
   def self.set_ap_client_mode
