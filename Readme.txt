@@ -9,4 +9,5 @@ Although this app was devleoped for use with the Raspberry Pi and the Edimax EW-
 Software Requirements:
 
 Ruby on Rails 4.2.0
-pi_piper ruby gem
+dsnmasq
+hostapd
