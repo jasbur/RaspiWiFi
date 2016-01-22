@@ -104,10 +104,10 @@ class Main < ActiveRecord::Base
 
   def self.reset_all
     system ('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
-    system ('rm -f /home/pi/tmp/*')
-    system ('sudo cp -r /home/pi/static_files/interfaces.aphost /etc/network/interfaces')
-    system ('sudo cp -r /home/pi/static_files/dnsmasq.conf /etc/')
-    system ('sudo cp -r /home/pi/static_files/rc.local.aphost /etc/rc.local')
+    system ('rm -f ../tmp/*')
+    system ('sudo cp -r ../Reset\ Device/static_files/interfaces.aphost /etc/network/interfaces')
+    system ('sudo cp -r ../Reset\ Device/static_files/dnsmasq.conf /etc/')
+    system ('sudo cp -r ../Reset\ Device/static_files/rc.local.aphost /etc/rc.local')
     system ('sudo reboot')
   end
 
