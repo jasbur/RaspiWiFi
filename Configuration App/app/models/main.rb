@@ -95,18 +95,6 @@ class Main < ActiveRecord::Base
 		system('rm /home/pi/tmp/wpa_supplicant.conf.tmp')
 	end
 
-  def self.create_user_credential_file(username, password)
-    user_credential_file = File.new('/home/pi/tmp/user_credentials.tmp', 'w')
-
-    user_credential_file.puts 'username=' + username
-    user_credential_file.puts 'password=' + password
-
-    user_credential_file.close
-
-    system('cp -r /home/pi/tmp/user_credentials.tmp /home/pi/user_data/user_credentials')
-    system('rm /home/pi/tmp/user_credentials.tmp')
-  end
-
   def self.set_ap_client_mode
     system ('sudo cp -r /home/pi/static_files/interfaces.apclient /etc/network/interfaces')
     system ('sudo cp -r /home/pi/static_files/rc.local.apclient /etc/rc.local')
