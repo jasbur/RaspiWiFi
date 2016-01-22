@@ -16,9 +16,9 @@ after :pin => 18, :goes => :high do |pin|
             system ('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
             system ('rm -f /home/pi/user_data/user_credentials')
             system ('rm -f /home/pi/tmp/*')
-            system ('sudo cp -r /home/pi/static_files/interfaces.aphost /etc/network/interfaces')
-            system ('sudo cp -r /home/pi/static_files/dnsmasq.conf /etc/')
-            system ('sudo cp -r /home/pi/static_files/rc.local.aphost /etc/rc.local')
+            system ('sudo cp -r static_files/interfaces.aphost /etc/network/interfaces')
+            system ('sudo cp -r static_files/dnsmasq.conf /etc/')
+            system ('sudo cp -r static_files/rc.local.aphost /etc/rc.local')
             system ('sudo reboot')
         end
 
