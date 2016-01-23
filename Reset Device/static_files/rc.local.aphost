@@ -17,7 +17,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-ruby /home/pi/Projects/RaspiWifi/Reset\ Device/reset.rb &
+python3 /home/pi/Projects/RaspiWifi/Reset\ Device/reset.py &
 
 su -c "cd /home/pi/Projects/RaspiWifi/Configuration\ App/ && rails s -b 0.0.0.0 -e production -p 80 -d"
 
