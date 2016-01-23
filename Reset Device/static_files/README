@@ -3,7 +3,7 @@ The ultimate locations of these files are:
 dhcpd.conf - /etc/dhcp/dhcpd.conf
 hostapd.conf - /etc/hostapd/hostapd.conf
 interfaces[.aphost][.apclient] - /etc/network/interfaces
-isc-dhcp-server[.aphost][.apclient] - /etc/defaults/isc-dhcp-server
+isc-dhcp-server[.aphost][.apclient] - /etc/default/isc-dhcp-server
 rc.local[.aphost][.apclient] - /etc/rc.local
 
 .aphost and .apclient denote which files should be used for each corresponding
