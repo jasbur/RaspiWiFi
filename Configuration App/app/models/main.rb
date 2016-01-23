@@ -106,7 +106,6 @@ class Main < ActiveRecord::Base
     system ('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
     system ('rm -f ../tmp/*')
     system ('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/interfaces.aphost /etc/network/interfaces')
-    system ('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/dnsmasq.conf /etc/')
     system ('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/rc.local.aphost /etc/rc.local')
     system ('sudo reboot')
   end
