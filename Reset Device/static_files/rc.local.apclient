@@ -17,5 +17,6 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
+ruby /home/pi/Projects/RaspiWifi/Reset\ Device/reset.rb &
 
 exit 0
