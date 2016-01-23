@@ -17,9 +17,9 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-ruby /home/pi/wifi_config_app/reset_only.rb &
+ruby /home/pi/Projects/RaspiWifi/Reset\ Device/reset.rb &
 
-su -c "cd /home/pi/Projects/wifi_config_app/ && rails s -b 0.0.0.0 -e production -d"
+su -c "cd /home/pi/Projects/RaspiWifi/Configuration\ App/ && rails s -b 0.0.0.0 -e production -p 80 -d"
 
 hostapd -dd /etc/hostapd/hostapd.conf &
 

@@ -17,6 +17,5 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-ruby /home/pi/Projects/wifi_config_app/main.rb &
 
 exit 0
