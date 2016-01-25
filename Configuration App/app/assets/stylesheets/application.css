@@ -13,3 +13,42 @@
  *= require_tree .
  *= require_self
  */
+
+body{
+  background-color: #E4DD9C;
+}
+
+div#mainContent{
+  background-color: #8BC34A;
+  width: 725px;
+  margin: 74px 0px 0px 9%;
+  padding: 30px 60px 63px 0px;
+  text-align: center;
+  font-size: 3.5em;
+  color: #505050;
+  box-shadow: 13px 17px 41px #505050;
+}
+
+div#mainContent ul{
+  list-style: none;
+}
+
+div#mainContent li{
+  margin: 0px 0px 45px 0px;
+}
+
+.wifiNetworkInputs{
+  width: 100%;
+  font-size: .8em;
+  color: #505050;
+}
+
+.wifiConnectButton{
+  width: 310px;
+  height: 150px;
+  margin: 68px 0px 105px 0px;
+  background-color: #D6D2AA;
+  border: 7px solid #505050;
+  font-size: 1em;
+  color: #505050;
+}

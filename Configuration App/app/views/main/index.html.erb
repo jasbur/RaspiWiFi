@@ -1,24 +1,28 @@
-<%=form_tag("/main/save_credentials", method: "get") do%>
-  <select id="ssid" name="ap_info">
-    <%for ap in @wifi_ap_hash do%>
-        <option value='<%=ap[:ssid]%>+<%=ap[:encryption_type]%>'><%=ap[:ssid]%></option>
-    <%end%>
-  </select>
+<div id="mainContent">
+  <h1>WiFi Setup</h1>
+  <%=form_tag("/main/save_credentials", method: "get") do%>
 
-  <%=label_tag(:wifi_key, "Wifi Password: ")%>
-  <%=text_field_tag(:wifi_key)%>
+    <ul>
+      <li><%=label_tag(:ssid, "Select your WiFi network")%></li>
+      <li>
+        <select id="ssid" name="ap_info", class="wifiNetworkInputs">
+          <%for ap in @wifi_ap_hash do%>
+              <option value='<%=ap[:ssid]%>+<%=ap[:encryption_type]%>'><%=ap[:ssid]%></option>
+          <%end%>
+        </select>
+      </li>
 
-  <%=submit_tag("Connect")%>
-<%end%>
+      <li><%=label_tag(:wifi_key, "Your Wifi password")%></li>
+      <li>
+        <%=password_field_tag(:wifi_key, nil, class: "wifiNetworkInputs")%>
+      </li>
 
-<h2>Current Values<h2>
+      <%=submit_tag("Connect!", class: "wifiConnectButton")%>
+    </ul>
 
-<ul>
-  <%for current_value in @current_values%>
-    <li><%=current_value%></li>
   <%end%>
-</ul>
 
-<%=form_tag("/main/reset_all", method: "get") do%>
-  <%=submit_tag("RESET DEVICE")%>
-<%end%>
+  <%=form_tag("/main/reset_all", method: "get") do%>
+    <%=submit_tag("RESET DEVICE")%>
+  <%end%>
+</div>
