@@ -27,3 +27,5 @@ while True:
         if GPIO.input(18) == 0:
             counter = 0
             break
+
+    time.sleep(1)
