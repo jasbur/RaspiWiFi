@@ -16,3 +16,15 @@ Software Requirements:
 Ruby on Rails 4.2.0
 isc-dhcp-server
 hostapd
+
+
+
+USAGE
+
+Just clone this repository to /home/pi/Projects, install the software listed above using apt-get, and copy the
+"aphost" files from the "static_files" directory to their appropriate destinations (listed in static_files/README).
+
+Reboot the Raspberry Pi and it will create its own hotspot named "RaspiWifi-Setup". Once connected navigate to 10.0.0.1
+from a web browser and setup to connect to your desired wireless network.
+
+Nothing is very optimized at the moment, so booting into the configuration mode can take 2.5 to 3 minutes.
