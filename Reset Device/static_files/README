@@ -6,5 +6,22 @@ interfaces[.aphost][.apclient] - /etc/network/interfaces
 isc-dhcp-server[.aphost][.apclient] - /etc/default/isc-dhcp-server
 rc.local[.aphost][.apclient] - /etc/rc.local
 
-.aphost and .apclient denote which files should be used for each corresponding
-mode
+*.aphost denotes files used when in configuration mode
+
+All files used in configuration mode:
+
+dhcpd.conf
+hostapd.conf
+interfaces.aphost
+isc-dhcp-server.aphost
+rc.local.aphost
+
+
+
+*.apclient denotes files used when in regular use mode
+
+All files used in configuration mode:
+
+interfaces.apclient
+isc-dhcp-server.apclient
+rc.local.apclient
