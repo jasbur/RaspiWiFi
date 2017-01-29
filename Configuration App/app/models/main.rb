@@ -103,17 +103,17 @@ class Main < ActiveRecord::Base
 	end
 
   def self.set_ap_client_mode
-    system ('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/interfaces.apclient /etc/network/interfaces')
-    system ('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/rc.local.apclient /etc/rc.local')
-    system ('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
+    system ('sudo cp -r /home/pi/Projects/RaspiWiFi/Reset\ Device/static_files/interfaces.apclient /etc/network/interfaces')
+    system ('sudo cp -r /home/pi/Projects/RaspiWiFi/Reset\ Device/static_files/rc.local.apclient /etc/rc.local')
+    system ('sudo cp -r /home/pi/Projects/RaspiWiFi/Reset\ Device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
     system ('sudo reboot')
   end
 
   def self.reset_all
     system ('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
     system ('rm -f ../tmp/*')
-    system ('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/interfaces.aphost /etc/network/interfaces')
-    system ('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/rc.local.aphost /etc/rc.local')
+    system ('sudo cp -r /home/pi/Projects/RaspiWiFi/Reset\ Device/static_files/interfaces.aphost /etc/network/interfaces')
+    system ('sudo cp -r /home/pi/Projects/RaspiWiFi/Reset\ Device/static_files/rc.local.aphost /etc/rc.local')
     system ('sudo reboot')
   end
 
