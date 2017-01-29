@@ -87,6 +87,13 @@ class Main < ActiveRecord::Base
       temp_conf_file.puts '	group=CCMP TKIP'
       temp_conf_file.puts '	psk="' + user_wifi_key + '"'
       temp_conf_file.puts '}'
+    elsif encryption_type == 'open'
+	  temp_conf_file.puts 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev'
+      temp_conf_file.puts 'update_config=1'
+      temp_conf_file.puts
+      temp_conf_file.puts 'network={'
+      temp_conf_file.puts '	ssid="' + user_ssid + '"'
+      temp_conf_file.puts '}'
     end
 
 		temp_conf_file.close
