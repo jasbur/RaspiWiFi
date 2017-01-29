@@ -17,6 +17,6 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-python3 /home/pi/Projects/RaspiWifi/Reset\ Device/reset.py &
+python3 /home/pi/Projects/RaspiWiFi/Reset\ Device/reset.py &
 
 exit 0

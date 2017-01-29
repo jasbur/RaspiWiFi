@@ -17,9 +17,9 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-python3 /home/pi/Projects/RaspiWifi/Reset\ Device/reset.py &
+python3 /home/pi/Projects/RaspiWiFi/Reset\ Device/reset.py &
 
-su -c "cd /home/pi/Projects/RaspiWifi/Configuration\ App/ && rails s -b 0.0.0.0 -e production -p 80 -d"
+su -c "cd /home/pi/Projects/RaspiWiFi/Configuration\ App/ && rails s -b 0.0.0.0 -e production -p 80 -d"
 
 hostapd -dd /etc/hostapd/hostapd.conf &
 
