@@ -17,11 +17,11 @@ while True:
         if counter == 9:
             os.system('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
             os.system('rm -f /home/pi/Projects/RaspiWifi/tmp/*')
-            os.system('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/dhcpd.conf /etc/dhcp/')
-            os.system('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/hostapd.conf /etc/hostapd/')
-            os.system('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/interfaces.aphost /etc/network/interfaces')
-            os.system('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/isc-dhcp-server.aphost /etc/default/isc-dhcp-server')
-            os.system('sudo cp -r /home/pi/Projects/RaspiWifi/Reset\ Device/static_files/rc.local.aphost /etc/rc.local')
+            os.system('sudo cp -r /home/pi/Projects/RaspiWiFi/Reset\ Device/static_files/dhcpd.conf /etc/dhcp/')
+            os.system('sudo cp -r /home/pi/Projects/RaspiWiFi/Reset\ Device/static_files/hostapd.conf /etc/hostapd/')
+            os.system('sudo cp -r /home/pi/Projects/RaspiWiFi/Reset\ Device/static_files/interfaces.aphost /etc/network/interfaces')
+            os.system('sudo cp -r /home/pi/Projects/RaspiWiFi/Reset\ Device/static_files/isc-dhcp-server.aphost /etc/default/isc-dhcp-server')
+            os.system('sudo cp -r /home/pi/Projects/RaspiWiFi/Reset\ Device/static_files/rc.local.aphost /etc/rc.local')
             os.system('sudo reboot')
 
         if GPIO.input(18) == 0:
