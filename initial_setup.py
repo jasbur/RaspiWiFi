@@ -5,11 +5,12 @@ import sys
 
 
 
-def update_rc_paths():
+def update_config_paths():
 	project_path = subprocess.check_output(['find', '/', '-name', 'GSbSFZwWV1mig4vFSmbLW9iP8TfGfMYCPfHTqGcD'])[:-42].decode('utf-8')
 
 	os.system('sudo cp -a Reset\ Device/static_files/rc.local.aphost.template Reset\ Device/static_files/rc.local.aphost')
 	os.system('sudo cp -a Reset\ Device/static_files/rc.local.apclient.template Reset\ Device/static_files/rc.local.apclient')
+	os.system('sudo cp -a Reset\ Device/reset.py.template Reset\ Device/reset.py')
 
 	with fileinput.FileInput("Reset Device/static_files/rc.local.aphost", inplace=True) as file:
 		for line in file:
@@ -17,6 +18,11 @@ def update_rc_paths():
 		file.close
 	
 	with fileinput.FileInput("Reset Device/static_files/rc.local.apclient", inplace=True) as file:
+		for line in file:
+			print(line.replace("[[project_dir]]", project_path), end='')
+		file.close
+	
+	with fileinput.FileInput("Reset Device/reset.py", inplace=True) as file:
 		for line in file:
 			print(line.replace("[[project_dir]]", project_path), end='')
 		file.close
@@ -38,7 +44,7 @@ if(run_setup_ans == 'y'):
 	print()
 	print("Detecting RaspiWiFi location...")
 	
-	update_rc_paths()
+	update_config_paths()
 	
 	os.system('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
 	os.system('rm -f ./tmp/*')
