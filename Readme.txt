@@ -1,30 +1,51 @@
-This code was written to configure a Raspberry Pi device for wireless access when no display is 
-available (very similar to the way a Chromecast or similar device needs to be configured).
+RaspiWiFi
 
-For now some of the paths are hard-coded so the project should be run from 
-/home/pi/Projects/RaspiWifi/ You can, of course change that location but make
-sure to update all hard links to that location in the source files before running.
-
-Although this app was devleoped for use with the Raspberry Pi and the Edimax EW-7811Un USB WiFi 
-adapter, the only Raspberry Pi specific code would be the GPIO call to watch for a physical 
-reset button to be pressed for 10 seconds.
+RaspiWiFi is a program to headlessly configure a Raspberry Pi's WiFi connection using using any other WiFi-enabled device (much like the way a Chromecast or similar device can be configured). RaspiWiFi has been tested with the Raspberry Pi B+ (using an Edimax USB WiFi adapter with modified driver as outlined in the "Prerequisites" section on this page http://www.daveconroy.com/turn-your-raspberry-pi-into-a-wifi-hotspot-with-edimax-nano-usb-ew-7811un-rtl8188cus-chipset/) and the Raspberry Pi 3. Although, it should technically work with any Raspberry Pi that has WiFi hardware.
 
 
 
-Software Requirements:
+INSTALLATION INSTRUCTIONS:
 
-Ruby on Rails 4.2.0
-isc-dhcp-server
-hostapd
+== Update your apt cache:
+
+sudo apt update
+
+== Install dependencies:
+
+sudo apt install bundler libsqlite3-dev isc-dhcp-server hostapd
+
+== Change to the "Configuration App" directory and install Rails gems:
+
+cd Configuration\ App/
+sudo gem bundle install
+
+== Change back to RaspiWiFi's root directory and run the initial setup:
+
+cd ..
+sudo python3 initial_setup.py
+
+== At this point your Raspberry Pi will reboot. When it finishes booting it should present itself in "Configuration Mode" as a WiFi access point with the name "RaspiWiFi Setup".
 
 
 
-USAGE
 
-Just clone this repository to /home/pi/Projects, install the software listed above using apt-get, and copy the
-"aphost" files from the "static_files" directory to their appropriate destinations (listed in static_files/README).
+USAGE:
 
-Reboot the Raspberry Pi and it will create its own hotspot named "RaspiWifi-Setup". Once connected navigate to 10.0.0.1
-from a web browser and setup to connect to your desired wireless network.
+== Connect to the "RaspiWiFi Setup" access point using any other WiFi enabled device.
 
-Nothing is very optimized at the moment, so booting into the configuration mode can take 2.5 to 3 minutes.
+== Navigate to http://10.0.0.1 using any web browser on the device you connected with.
+
+== Select the WiFi connection you'd like your Raspberry Pi to connect to from the drop down list and enter its wireless password on the page provided. If no encryption is enabled, leave the password box blank.
+
+== Click the "Connect" button.
+
+== At this point your Raspberry Pi will reboot and connect to the access point specified.
+
+
+
+
+RESETTING THE DEVICE:
+
+== If GPIO 18 is pulled HIGH for 10 seconds or more the Raspberry Pi will reset all settings, reboot, and enter "Configuration Mode" again. It's useful to have a simple button wired on GPIO 18 to reset easily if moving to a new location, or if incorrect connection information is ever entered. Just press and hold for 10 seconds or longer.
+
+== You can also reset the device by re-running the initial_setup.py as instructed above.
