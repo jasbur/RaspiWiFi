@@ -1,5 +1,30 @@
+import subprocess
+import fileinput
 import os
 import sys
+
+
+
+def update_rc_paths():
+	project_path = subprocess.check_output(['find', '/', '-name', 'GSbSFZwWV1mig4vFSmbLW9iP8TfGfMYCPfHTqGcD'])[:-42].decode('utf-8')
+
+	os.system('sudo cp -a Reset\ Device/static_files/rc.local.aphost.template Reset\ Device/static_files/rc.local.aphost')
+	os.system('sudo cp -a Reset\ Device/static_files/rc.local.apclient.template Reset\ Device/static_files/rc.local.apclient')
+
+	with fileinput.FileInput("Reset Device/static_files/rc.local.aphost", inplace=True) as file:
+		for line in file:
+			print(line.replace("[[project_dir]]", project_path), end='')
+		file.close
+	
+	with fileinput.FileInput("Reset Device/static_files/rc.local.apclient", inplace=True) as file:
+		for line in file:
+			print(line.replace("[[project_dir]]", project_path), end='')
+		file.close
+
+
+#################################################################
+#################################################################
+
 
 print()
 print("###################################")
@@ -10,6 +35,11 @@ print()
 run_setup_ans = input("Would you like to run the initial setup for RaspiWiFi? (y/n): ")
 
 if(run_setup_ans == 'y'):
+	print()
+	print("Detecting RaspiWiFi location...")
+	
+	update_rc_paths()
+	
 	os.system('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
 	os.system('rm -f ./tmp/*')
 	os.system('sudo cp -r ./Reset\ Device/static_files/dhcpd.conf /etc/dhcp/')
