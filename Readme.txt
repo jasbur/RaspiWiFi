@@ -12,12 +12,12 @@ sudo apt update
 
 == Install dependencies:
 
-sudo apt install bundler libsqlite3-dev isc-dhcp-server hostapd
+sudo apt install python3 bundler libsqlite3-dev isc-dhcp-server hostapd
 
 == Change to the "Configuration App" directory and install Rails gems:
 
 cd Configuration\ App/
-sudo gem bundle install
+sudo bundle install
 
 == Change back to RaspiWiFi's root directory and run the initial setup:
 
