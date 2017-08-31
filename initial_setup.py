@@ -6,7 +6,9 @@ import sys
 
 
 def update_config_paths():
-	project_path = subprocess.check_output(['find', '/', '-name', 'GSbSFZwWV1mig4vFSmbLW9iP8TfGfMYCPfHTqGcD'])[:-42].decode('utf-8')
+	find_output = subprocess.Popen(['find', '/', '-name', 'GSbSFZwWV1mig4vFSmbLW9iP8TfGfMYCPfHTqGcD'], stdout=subprocess.PIPE)
+	project_path_raw, err = find_output.communicate()
+	project_path = str(project_path_raw.decode('utf-8'))[:-42]
 
 	os.system('sudo cp -a Reset\ Device/static_files/rc.local.aphost.template Reset\ Device/static_files/rc.local.aphost')
 	os.system('sudo cp -a Reset\ Device/static_files/rc.local.apclient.template Reset\ Device/static_files/rc.local.apclient')
