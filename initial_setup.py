@@ -6,9 +6,7 @@ import sys
 
 
 def update_config_paths():
-	find_output = subprocess.Popen(['find', '/', '-name', 'GSbSFZwWV1mig4vFSmbLW9iP8TfGfMYCPfHTqGcD'], stdout=subprocess.PIPE)
-	project_path_raw, err = find_output.communicate()
-	project_path = str(project_path_raw.decode('utf-8'))[:-42]
+	project_path = os.path.dirname(os.path.abspath(__file__))
 
 	os.system('sudo cp -a Reset\ Device/static_files/rc.local.aphost.template Reset\ Device/static_files/rc.local.aphost')
 	os.system('sudo cp -a Reset\ Device/static_files/rc.local.apclient.template Reset\ Device/static_files/rc.local.apclient')
@@ -18,12 +16,12 @@ def update_config_paths():
 		for line in file:
 			print(line.replace("[[project_dir]]", project_path), end='')
 		file.close
-	
+
 	with fileinput.FileInput("Reset Device/static_files/rc.local.apclient", inplace=True) as file:
 		for line in file:
 			print(line.replace("[[project_dir]]", project_path), end='')
 		file.close
-	
+
 	with fileinput.FileInput("Reset Device/reset.py", inplace=True) as file:
 		for line in file:
 			print(line.replace("[[project_dir]]", project_path), end='')
@@ -44,10 +42,10 @@ run_setup_ans = input("Would you like to run the initial setup for RaspiWiFi? (y
 
 if(run_setup_ans == 'y'):
 	print()
-	print("Detecting RaspiWiFi location...")
-	
+	print("Running initial configuration...")
+
 	update_config_paths()
-	
+
 	os.system('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
 	os.system('rm -f ./tmp/*')
 	os.system('sudo cp -r ./Reset\ Device/static_files/dhcpd.conf /etc/dhcp/')
