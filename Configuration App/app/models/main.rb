@@ -105,7 +105,8 @@ class Main < ActiveRecord::Base
   def self.set_ap_client_mode
 	raspiwifi_path = find_raspiwifi_path()
 	
-    system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/interfaces.apclient /etc/network/interfaces')
+    #system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/interfaces.apclient /etc/network/interfaces')
+    system ('sudo rm /etc/network/interfaces')
     system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/rc.local.apclient /etc/rc.local')
     system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
     system ('sudo reboot')
