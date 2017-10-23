@@ -4,6 +4,15 @@ import os
 import sys
 
 
+def install_prereqs():
+	project_path = os.path.dirname(os.path.abspath(__file__))
+	
+	print("Updating Apt...")
+	os.system('apt update &>/dev/null')
+	print("Installing prerequisites via Apt...")
+	os.system('apt sudo apt install python3 bundler libsqlite3-dev isc-dhcp-server hostapd  &>/dev/null')
+	print("Installing necessary Ruby Gems. This can take a few minutes...")
+	os.system('bundle install --gemfile=' + project_path + '/Configuration\ App/Gemfile')
 
 def update_config_paths():
 	project_path = os.path.dirname(os.path.abspath(__file__))
@@ -42,8 +51,10 @@ run_setup_ans = input("Would you like to run the initial setup for RaspiWiFi? (y
 
 if(run_setup_ans == 'y'):
 	print()
-	print("Running initial configuration...")
-
+	print("Updating system...")
+	install_prereqs()
+	
+	print("Updating config files and copying them...")
 	update_config_paths()
 
 	os.system('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
