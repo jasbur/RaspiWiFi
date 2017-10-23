@@ -104,9 +104,14 @@ class Main < ActiveRecord::Base
 
   def self.set_ap_client_mode
 	raspiwifi_path = find_raspiwifi_path()
+	lsb_release_string = %x{lsb_release -a}
 	
-    #system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/interfaces.apclient /etc/network/interfaces')
-    system ('sudo rm /etc/network/interfaces')
+	if lsb_release_string.include?('jessie')
+		system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/interfaces.apclient /etc/network/interfaces')
+	elsif lsb_release_string.include?('stretch')
+		system ('sudo rm /etc/network/interfaces')
+	end
+	
     system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/rc.local.apclient /etc/rc.local')
     system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
     system ('sudo reboot')
@@ -123,8 +128,7 @@ class Main < ActiveRecord::Base
   end
   
   def self.find_raspiwifi_path
-	find_path = %x(sudo find / -name "GSbSFZwWV1mig4vFSmbLW9iP8TfGfMYCPfHTqGcD")
-	raspiwifi_path = find_path[0..-43]
+	raspiwifi_path = File.dirname(__FILE__)[0..-30]
 	
 	raspiwifi_path
   end
