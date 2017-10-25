@@ -8,9 +8,9 @@ def install_prereqs():
 	project_path = os.path.dirname(os.path.abspath(__file__))
 	
 	print("Updating Apt...")
-	os.system('apt update &>/dev/null')
+	os.system('apt update')
 	print("Installing prerequisites via Apt...")
-	os.system('apt sudo apt install python3 bundler libsqlite3-dev isc-dhcp-server hostapd  &>/dev/null')
+	os.system('apt install python3 bundler libsqlite3-dev isc-dhcp-server hostapd -y')
 	print("Installing necessary Ruby Gems. This can take a few minutes...")
 	os.system('bundle install --gemfile=' + project_path + '/Configuration\ App/Gemfile')
 
@@ -47,13 +47,32 @@ print("##### RaspiWiFi Intial Setup  #####")
 print("###################################")
 print()
 print()
-run_setup_ans = input("Would you like to run the initial setup for RaspiWiFi? (y/n): ")
+install_prereqs_ans = input("Would you like to install prerequisite files (This can take up to 5 minutes)? (y/n): ")
 
-if(run_setup_ans == 'y'):
+if(install_prereqs_ans == 'y'):
 	print()
 	print("Updating system...")
 	install_prereqs()
+else:
+	print()
+	print()
+	print("===================================================")
+	print("---------------------------------------------------")
+	print()
+	print("No Prerequisites installed. Continuing to configuration file installation...")
+	print()
+	print("---------------------------------------------------")
+	print("===================================================")
+	print()
+	print()
 	
+print()
+print()
+print()
+print()
+run_setup_ans = input("Would you like to run the initial setup for RaspiWiFi? (y/n): ")
+
+if(run_setup_ans == 'y'):
 	print("Updating config files and copying them...")
 	update_config_paths()
 
@@ -67,9 +86,15 @@ if(run_setup_ans == 'y'):
 else:
 	print()
 	print()
+	print("===================================================")
 	print("---------------------------------------------------")
-	print("---------------------------------------------------")
+	print()
 	print("RaspiWiFi initial setup cancelled. No changes made.")
+	print()
+	print("---------------------------------------------------")
+	print("===================================================")
+	print()
+	print()
 	sys.exit(0)
 
 print()
