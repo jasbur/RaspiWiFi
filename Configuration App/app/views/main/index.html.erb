@@ -1,10 +1,11 @@
 <div id="mainContent">
   <h1>WiFi Setup</h1>
+  <div class="wifiIcon" /></div>
   <%=form_tag("/main/save_credentials", method: "get") do%>
 
     <ul>
       <li><%=label_tag(:ssid, "Select your WiFi network")%></li>
-      <li>
+      <li class="wifiNetwork">
         <select id="ssid" name="ap_info", class="wifiNetworkInputs">
           <%for ap in @wifi_ap_hash do%>
               <option value='<%=ap[:ssid]%>+<%=ap[:encryption_type]%>'><%=ap[:ssid]%></option>
@@ -21,8 +22,9 @@
     </ul>
 
   <%end%>
-
+  <div class="reset">
   <%=form_tag("/main/reset_all", method: "get") do%>
     <%=submit_tag("RESET DEVICE")%>
+  </div>
   <%end%>
 </div>
