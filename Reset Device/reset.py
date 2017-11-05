@@ -15,6 +15,7 @@ while True:
         print(counter)
 
         if counter == 9:
+            os.system('aplay [[project_dir]]/Reset\ Device/button_chime.wav')
             os.system('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
             os.system('rm -f /home/pi/Projects/RaspiWifi/tmp/*')
             os.system('sudo cp -r [[project_dir]]/Reset\ Device/static_files/dhcpd.conf /etc/dhcp/')
