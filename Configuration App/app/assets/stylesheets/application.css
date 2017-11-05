@@ -98,18 +98,6 @@ select.wifiNetworkInputs {
 	appearance: none;
 }
 
-.reset input {
-	background:#BF1A2F;
-	border:#BF1A2F;
-	color:white;
-	padding:1em;
-	margin-top:1.5em;
-	font-size:1.5rem;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-}
-
   /* Wifi Icon
 ---------------------------------------------------------*/
 
