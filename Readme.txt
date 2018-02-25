@@ -24,7 +24,7 @@ USAGE:
 
 == Connect to the "RaspiWiFi Setup" access point using any other WiFi enabled device.
 
-== Navigate to http://10.0.0.1 using any web browser on the device you connected with.
+== Navigate to http://10.0.0.1:9191 using any web browser on the device you connected with.
 
 == Select the WiFi connection you'd like your Raspberry Pi to connect to from the drop down list and enter its wireless password on the page provided. If no encryption is enabled, leave the password box blank.
 
