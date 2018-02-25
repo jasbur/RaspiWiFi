@@ -21,6 +21,7 @@ def update_config_paths():
 	os.system('sudo cp -a Reset\ Device/static_files/rc.local.aphost.template Reset\ Device/static_files/rc.local.aphost')
 	os.system('sudo cp -a Reset\ Device/static_files/rc.local.apclient.template Reset\ Device/static_files/rc.local.apclient')
 	os.system('sudo cp -a Reset\ Device/reset.py.template Reset\ Device/reset.py')
+	os.system('sudo cp -a Reset\ Device/manual_reset.py.template Reset\ Device/manual_reset.py')
 
 	with fileinput.FileInput("Reset Device/static_files/rc.local.aphost", inplace=True) as file:
 		for line in file:
@@ -33,6 +34,11 @@ def update_config_paths():
 		file.close
 
 	with fileinput.FileInput("Reset Device/reset.py", inplace=True) as file:
+		for line in file:
+			print(line.replace("[[project_dir]]", project_path), end='')
+		file.close
+		
+	with fileinput.FileInput("Reset Device/manual_reset.py", inplace=True) as file:
 		for line in file:
 			print(line.replace("[[project_dir]]", project_path), end='')
 		file.close
