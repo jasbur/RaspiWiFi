@@ -18,6 +18,7 @@ for line in hostapd_conf:
             for line in file:
                 print(line.replace("temp-ssid", "RaspiWiFi-Setup_" + serial_last_four), end='')
                 file.close
+        os.system('reboot')
     else:
         hostapd_conf.close
 
