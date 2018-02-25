@@ -7,6 +7,7 @@ import sys
 def install_prereqs():
 	project_path = os.path.dirname(os.path.abspath(__file__))
 	
+	os.system('clear')
 	os.system('apt update')
 	os.system('clear')
 	os.system('apt install python3 bundler libsqlite3-dev isc-dhcp-server hostapd libxml2-dev libxslt-dev -y')
@@ -83,9 +84,16 @@ else:
 	print()
 	sys.exit()
 
+os.system('clear')
 print()
 print()
-reboot_ans = input("Initial setup is complete. A reboot is required to start in WiFi configuration mode, would you like to do that now? (y/n): ")
+print("#####################################")
+print("##### RaspiWiFi Setup Complete  #####")
+print("#####################################")
+print()
+print()
+print("Initial setup is complete. A reboot is required to start in WiFi configuration mode...")
+reboot_ans = input("Would you like to do that now? (y/n): ")
 
 if reboot_ans == 'y':
 	os.system('sudo reboot')
