@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python3 [[project_dir]]/Reset\ Device/reset.py &
