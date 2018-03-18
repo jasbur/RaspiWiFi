@@ -112,7 +112,8 @@ class Main < ActiveRecord::Base
 		system ('sudo rm /etc/network/interfaces')
 	end
 	
-    system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/rc.local.apclient /etc/rc.local')
+    system ('rm /etc/cron.raspiwifi/aphost_bootstrapper')
+    system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
     system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
     system ('sudo reboot')
   end

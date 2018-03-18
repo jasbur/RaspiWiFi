@@ -20,17 +20,17 @@ def install_prereqs():
 def update_config_paths():
 	project_path = os.path.dirname(os.path.abspath(__file__))
 
-	os.system('sudo cp -a Reset\ Device/static_files/rc.local.aphost.template Reset\ Device/static_files/rc.local.aphost')
-	os.system('sudo cp -a Reset\ Device/static_files/rc.local.apclient.template Reset\ Device/static_files/rc.local.apclient')
+	os.system('sudo cp -a Reset\ Device/static_files/apclient_bootstrapper.template Reset\ Device/static_files/apclient_bootstrapper')
+	os.system('sudo cp -a Reset\ Device/static_files/aphost_bootstrapper.template Reset\ Device/static_files/aphost_bootstrapper')
 	os.system('sudo cp -a Reset\ Device/reset.py.template Reset\ Device/reset.py')
 	os.system('sudo cp -a Reset\ Device/manual_reset.py.template Reset\ Device/manual_reset.py')
 
-	with fileinput.FileInput("Reset Device/static_files/rc.local.aphost", inplace=True) as file:
+	with fileinput.FileInput("Reset Device/static_files/aphost_bootstrapper", inplace=True) as file:
 		for line in file:
 			print(line.replace("[[project_dir]]", project_path), end='')
 		file.close
 
-	with fileinput.FileInput("Reset Device/static_files/rc.local.apclient", inplace=True) as file:
+	with fileinput.FileInput("Reset Device/static_files/apclient_bootstrapper", inplace=True) as file:
 		for line in file:
 			print(line.replace("[[project_dir]]", project_path), end='')
 		file.close
@@ -69,7 +69,10 @@ if(install_ans == 'y'):
 	os.system('sudo cp -a ./Reset\ Device/static_files/hostapd.conf /etc/hostapd/')
 	os.system('sudo cp -a ./Reset\ Device/static_files/interfaces.aphost /etc/network/interfaces')
 	os.system('sudo cp -a ./Reset\ Device/static_files/isc-dhcp-server.aphost /etc/default/isc-dhcp-server')
-	os.system('sudo cp -a ./Reset\ Device/static_files/rc.local.aphost /etc/rc.local')
+	os.system('mkdir /etc/cron.raspiwifi')
+	os.system('sudo cp -a ./Reset\ Device/static_files/aphost_bootstrapper /etc/cron.raspiwifi')
+	os.system('echo "# RaspiWiFi Startup" >> /etc/crontab')
+	os.system('echo "@reboot root run-parts /etc/cron.raspiwifi/" >> /etc/crontab')
 else:
 	print()
 	print()

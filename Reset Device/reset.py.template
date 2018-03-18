@@ -40,7 +40,8 @@ while True:
             os.system('sudo cp -r [[project_dir]]/Reset\ Device/static_files/hostapd.conf /etc/hostapd/')
             os.system('sudo cp -r [[project_dir]]/Reset\ Device/static_files/interfaces.aphost /etc/network/interfaces')
             os.system('sudo cp -r [[project_dir]]/Reset\ Device/static_files/isc-dhcp-server.aphost /etc/default/isc-dhcp-server')
-            os.system('sudo cp -r [[project_dir]]/Reset\ Device/static_files/rc.local.aphost /etc/rc.local')
+            os.system('rm /etc/cron.rapiwifi/apclient_bootstrapper')
+            os.system('sudo cp -r [[project_dir]]/Reset\ Device/static_files/aphost_bootstrapper /etc/cron.raspiwifi/')
             os.system('sudo reboot')
 
         if GPIO.input(18) == 0:
