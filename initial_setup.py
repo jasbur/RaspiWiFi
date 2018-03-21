@@ -10,7 +10,7 @@ def install_prereqs():
 	os.system('clear')
 	os.system('apt update')
 	os.system('clear')
-	os.system('apt install python3 bundler libsqlite3-dev isc-dhcp-server hostapd libxml2-dev libxslt-dev -y')
+	os.system('apt install python3 python3-rpi.gpio bundler libsqlite3-dev isc-dhcp-server hostapd libxml2-dev libxslt-dev -y')
 	os.system('clear')
 	os.system('gem install nokogiri --no-document -v 1.6.6.2 -- --use-system-libraries')
 	os.system('clear')
