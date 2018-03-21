@@ -4,4 +4,8 @@ python3 [[project_dir]]/Reset\ Device/reset.py &
 
 su -c "cd [[project_dir]]/Configuration\ App/ && rails s -b 0.0.0.0 -e production -p 9191 -d"
 
+sleep 5
+
+systemctl start isc-dhcp-server.service
+
 hostapd -dd /etc/hostapd/hostapd.conf &
