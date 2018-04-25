@@ -77,35 +77,6 @@ class Main < ActiveRecord::Base
 
 		temp_conf_file.puts '}'
 
-    # if encryption_type == 'WPA2'
-    #   temp_conf_file.puts 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev'
-    #   temp_conf_file.puts 'update_config=1'
-    #   temp_conf_file.puts
-    #   temp_conf_file.puts 'network={'
-    #   temp_conf_file.puts '	ssid="' + user_ssid + '"'
-    #   temp_conf_file.puts '	psk="' + user_wifi_key + '"'
-    #   temp_conf_file.puts '}'
-    # elsif encryption_type == 'WPA'
-    #   temp_conf_file.puts 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev'
-    #   temp_conf_file.puts 'update_config=1'
-    #   temp_conf_file.puts
-    #   temp_conf_file.puts 'network={'
-    #   temp_conf_file.puts '	ssid="' + user_ssid + '"'
-    #   temp_conf_file.puts '	proto=WPA RSN'
-    #   temp_conf_file.puts '	key_mgmt=WPA-PSK'
-    #   temp_conf_file.puts '	pairwise=CCMP PSK'
-    #   temp_conf_file.puts '	group=CCMP TKIP'
-    #   temp_conf_file.puts '	psk="' + user_wifi_key + '"'
-    #   temp_conf_file.puts '}'
-    # elsif encryption_type == 'open'
-	  # temp_conf_file.puts 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev'
-    #   temp_conf_file.puts 'update_config=1'
-    #   temp_conf_file.puts
-    #   temp_conf_file.puts 'network={'
-    #   temp_conf_file.puts '	ssid="' + user_ssid + '"'
-    #   temp_conf_file.puts '}'
-    # end
-
 		temp_conf_file.close
 
 		system('sudo cp -r ../tmp/wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
