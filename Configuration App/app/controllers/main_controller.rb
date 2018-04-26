@@ -9,7 +9,9 @@ class MainController < ApplicationController
       ssid = params[:ap_info].split('+')[0]
       encryption_type = params[:ap_info].split('+')[1]
 
-      unless ssid.nil? or params[:wifi_key] == ""
+      if params[:wifi_key] == ""
+        Main.create_wpa_supplicant(ssid, encryption_type, "open")
+      else
         Main.create_wpa_supplicant(ssid, encryption_type, params[:wifi_key])
       end
 
