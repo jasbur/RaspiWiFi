@@ -71,7 +71,9 @@ class Main < ActiveRecord::Base
 		temp_conf_file.puts 'network={'
 		temp_conf_file.puts '	ssid="' + user_ssid + '"'
 
-		unless encryption_type == 'open'
+		if encryption_type == 'open'
+			temp_conf_file.puts '	key_mgmt=NONE'
+		else
 			temp_conf_file.puts '	psk="' + user_wifi_key + '"'
 		end
 
