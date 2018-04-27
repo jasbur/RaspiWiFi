@@ -7,6 +7,8 @@ class Main < ActiveRecord::Base
     ap_list.each{|ap_grouping|
         ap_hash = Hash.new
         encryption_found = false
+        wpa_found = false
+        wpa2_found = false
         ssid = ''
         encryption_type = ''
 
@@ -20,12 +22,18 @@ class Main < ActiveRecord::Base
               encryption_type = 'wep'
           elsif line.include?('WPA Version 1')
               encryption_found = true
+              wpa_found = true
               encryption_type = 'WPA'
           elsif line.include?('IEEE 802.11i/WPA2')
               encryption_found = true
+              wpa2_found = true
               encryption_type = 'WPA2'
           end
         }
+
+        if wpa_found == true && wpa2_found == true
+          encryption_type = 'WPA2'
+        end
 
         if encryption_found == false
           encryption_type = 'open'
