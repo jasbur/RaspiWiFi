@@ -101,20 +101,10 @@ class Main < ActiveRecord::Base
     system ('sudo reboot')
   end
 
-  def self.reset_all
-    raspiwifi_path = find_raspiwifi_path()
-
-    system ('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
-    system ('rm -f ' + raspiwifi_path + '/tmp/*')
-    system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/interfaces.aphost /etc/network/interfaces')
-    system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/rc.local.aphost /etc/rc.local')
-    system ('sudo reboot')
-  end
-
   def self.find_raspiwifi_path
-	raspiwifi_path = File.dirname(__FILE__)[0..-30]
+		raspiwifi_path = File.dirname(__FILE__)[0..-30]
 
-	raspiwifi_path
+		raspiwifi_path
   end
 
 end

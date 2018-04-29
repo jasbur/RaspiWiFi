@@ -20,8 +20,4 @@ class MainController < ApplicationController
       end
     end
 
-    def reset_all
-      Main.reset_all
-    end
-
 end
