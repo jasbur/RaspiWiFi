@@ -6,7 +6,7 @@ import sys
 
 def install_prereqs():
 	project_path = os.path.dirname(os.path.abspath(__file__))
-	
+
 	os.system('clear')
 	os.system('apt update')
 	os.system('clear')
@@ -22,8 +22,7 @@ def update_config_paths():
 
 	os.system('sudo cp -a Reset\ Device/static_files/apclient_bootstrapper.template Reset\ Device/static_files/apclient_bootstrapper')
 	os.system('sudo cp -a Reset\ Device/static_files/aphost_bootstrapper.template Reset\ Device/static_files/aphost_bootstrapper')
-	os.system('sudo cp -a Reset\ Device/reset.py.template Reset\ Device/reset.py')
-	os.system('sudo cp -a Reset\ Device/manual_reset.py.template Reset\ Device/manual_reset.py')
+	os.system('sudo cp -a Reset\ Device/reset_lib.py.template Reset\ Device/reset_lib.py')
 
 	with fileinput.FileInput("Reset Device/static_files/aphost_bootstrapper", inplace=True) as file:
 		for line in file:
@@ -35,12 +34,7 @@ def update_config_paths():
 			print(line.replace("[[project_dir]]", project_path), end='')
 		file.close
 
-	with fileinput.FileInput("Reset Device/reset.py", inplace=True) as file:
-		for line in file:
-			print(line.replace("[[project_dir]]", project_path), end='')
-		file.close
-		
-	with fileinput.FileInput("Reset Device/manual_reset.py", inplace=True) as file:
+	with fileinput.FileInput("Reset Device/reset_lib.py", inplace=True) as file:
 		for line in file:
 			print(line.replace("[[project_dir]]", project_path), end='')
 		file.close

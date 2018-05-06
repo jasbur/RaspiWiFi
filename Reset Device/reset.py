@@ -3,6 +3,7 @@ import os
 import time
 import fileinput
 import subprocess
+import reset_lib
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -33,16 +34,7 @@ while True:
         print(counter)
 
         if counter == 9:
-            os.system('aplay [[project_dir]]/Reset\ Device/button_chime.wav')
-            os.system('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
-            os.system('rm -f /home/pi/Projects/RaspiWifi/tmp/*')
-            os.system('sudo cp -r [[project_dir]]/Reset\ Device/static_files/dhcpd.conf /etc/dhcp/')
-            os.system('sudo cp -r [[project_dir]]/Reset\ Device/static_files/hostapd.conf /etc/hostapd/')
-            os.system('sudo cp -r [[project_dir]]/Reset\ Device/static_files/interfaces.aphost /etc/network/interfaces')
-            os.system('sudo cp -r [[project_dir]]/Reset\ Device/static_files/isc-dhcp-server.aphost /etc/default/isc-dhcp-server')
-            os.system('rm /etc/cron.raspiwifi/apclient_bootstrapper')
-            os.system('sudo cp -r [[project_dir]]/Reset\ Device/static_files/aphost_bootstrapper /etc/cron.raspiwifi/')
-            os.system('sudo reboot')
+            reset_lib.reset_to_host_mode()
 
         if GPIO.input(18) == 0:
             counter = 0
