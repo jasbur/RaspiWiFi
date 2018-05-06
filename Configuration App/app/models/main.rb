@@ -5,36 +5,17 @@ class Main < ActiveRecord::Base
     ap_array = Array.new
 
     ap_list.each{|ap_grouping|
-        ap_hash = Hash.new
-        encryption_found = false
-        ssid = ''
-        encryption_type = ''
+      ssid = ''
 
-        ap_grouping.split("\n").each{|line|
-          if line.include?('ESSID')
-              ssid = line[27..-2]
-          end
-
-          if line.include?('WEP')
-              encryption_found = true
-              encryption_type = 'wep'
-          elsif line.include?('WPA Version 1')
-              encryption_found = true
-              encryption_type = 'WPA'
-          elsif line.include?('IEEE 802.11i/WPA2')
-              encryption_found = true
-              encryption_type = 'WPA2'
-          end
-        }
-
-        if encryption_found == false
-          encryption_type = 'open'
+      ap_grouping.split("\n").each{|line|
+        if line.include?('ESSID')
+            ssid = line[27..-2]
         end
+      }
 
-        unless ssid == ''
-          ap_hash = {:ssid => ssid, :encryption_type => encryption_type}
-          ap_array << ap_hash
-        end
+      unless ssid == ''
+        ap_array << ssid
+      end
     }
 
     ap_array
@@ -62,19 +43,19 @@ class Main < ActiveRecord::Base
     current_values
 	end
 
-  def self.create_wpa_supplicant(user_ssid, encryption_type, user_wifi_key)
+  def self.create_wpa_supplicant(ssid, wifi_key)
 		temp_conf_file = File.new('../tmp/wpa_supplicant.conf.tmp', 'w')
 
 		temp_conf_file.puts 'ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev'
 		temp_conf_file.puts 'update_config=1'
 		temp_conf_file.puts
 		temp_conf_file.puts 'network={'
-		temp_conf_file.puts '	ssid="' + user_ssid + '"'
+		temp_conf_file.puts '	ssid="' + ssid + '"'
 
-		if encryption_type == 'open'
+		if wifi_key == 'open'
 			temp_conf_file.puts '	key_mgmt=NONE'
 		else
-			temp_conf_file.puts '	psk="' + user_wifi_key + '"'
+			temp_conf_file.puts '	psk="' + wifi_key + '"'
 		end
 
 		temp_conf_file.puts '}'

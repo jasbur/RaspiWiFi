@@ -5,10 +5,11 @@
 
     <ul>
       <li><%=label_tag(:ssid, "Select your WiFi network")%></li>
+
       <li class="wifiNetwork">
-        <select id="ssid" name="ap_info", class="wifiNetworkInputs">
-          <%for ap in @wifi_ap_hash do%>
-              <option value='<%=ap[:ssid]%>+<%=ap[:encryption_type]%>'><%=ap[:ssid]%></option>
+        <select id="ssid" name="ssid", class="wifiNetworkInputs">
+          <%for ssid in @wifi_ap_array do%>
+              <option value='<%=ssid%>'><%=ssid%></option>
           <%end%>
         </select>
       </li>
