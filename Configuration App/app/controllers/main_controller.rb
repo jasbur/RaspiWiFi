@@ -1,7 +1,6 @@
 class MainController < ApplicationController
 
     def index
-      @current_values = Main.get_current_config_values
       @wifi_ap_array = Main.scan_wifi_networks
     end
 

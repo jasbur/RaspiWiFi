@@ -21,28 +21,6 @@ class Main < ActiveRecord::Base
     ap_array
 	end
 
-	def self.get_current_config_values
-    current_values = Array.new
-
-    if File.exist?('/etc/wpa_supplicant/wpa_supplicant.conf')
-      wpa_supplicant_file = File.open('/etc/wpa_supplicant/wpa_supplicant.conf', 'r')
-
-      wpa_supplicant_file.each{|line|
-        if line.include?('ssid=')
-            current_values << line.split('=')[1].chomp[1..-2]
-        elsif line.include?('psk=')
-            current_values << line.split('=')[1].chomp[1..-2]
-        end
-      }
-
-      wpa_supplicant_file.close
-    else
-      current_values << ''
-    end
-
-    current_values
-	end
-
   def self.create_wpa_supplicant(ssid, wifi_key)
 		temp_conf_file = File.new('../tmp/wpa_supplicant.conf.tmp', 'w')
 
