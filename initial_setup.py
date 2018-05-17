@@ -59,6 +59,7 @@ if(install_ans == 'y'):
 
 	os.system('sudo rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
 	os.system('rm -f ./tmp/*')
+	os.system('sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original')
 	os.system('sudo cp -a ./Reset\ Device/static_files/dnsmasq.conf /etc/')
 	os.system('sudo cp -a ./Reset\ Device/static_files/hostapd.conf /etc/hostapd/')
         os.system('sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.original')

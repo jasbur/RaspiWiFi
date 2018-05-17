@@ -56,6 +56,8 @@ class Main < ActiveRecord::Base
 
     system ('rm /etc/cron.raspiwifi/aphost_bootstrapper')
     system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
+    system ('sudo mv /etc/dnsmasq.conf.original /etc/dnsmasq.conf')
+    system ('sudo mv /etc/dhcpcd.conf.original /etc/dhcpcd.conf')
     system ('sudo cp -r ' + raspiwifi_path + '/Reset\ Device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
     system ('sudo reboot')
   end
