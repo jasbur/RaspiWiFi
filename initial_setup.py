@@ -61,6 +61,8 @@ if(install_ans == 'y'):
 	os.system('rm -f ./tmp/*')
 	os.system('sudo cp -a ./Reset\ Device/static_files/dnsmasq.conf /etc/')
 	os.system('sudo cp -a ./Reset\ Device/static_files/hostapd.conf /etc/hostapd/')
+        os.system('sudo mv /etc/dhcpcd.conf /etc/dhcpcd.conf.original')
+	os.system('sudo cp -a ./Reset\ Device/static_files/dhcpcd.conf /etc/')
 	os.system('mkdir /etc/cron.raspiwifi')
 	os.system('sudo cp -a ./Reset\ Device/static_files/aphost_bootstrapper /etc/cron.raspiwifi')
 	os.system('echo "# RaspiWiFi Startup" >> /etc/crontab')
