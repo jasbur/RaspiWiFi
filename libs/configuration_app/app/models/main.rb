@@ -40,17 +40,17 @@ class Main < ActiveRecord::Base
 
 		temp_conf_file.close
 
-		system('cp -r ../tmp/wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
+		system('cp ../tmp/wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
 		system('rm ../tmp/wpa_supplicant.conf.tmp')
 	end
 
   def self.set_ap_client_mode
     system ('rm /etc/cron.raspiwifi/aphost_bootstrapper')
-    system ('cp -r /usr/lib/raspiwifi/reset_device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
+    system ('cp /usr/lib/raspiwifi/reset_device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
 		system ('chmod +x /etc/cron.raspiwifi/apclient_bootstrapper')
     system ('mv /etc/dnsmasq.conf.original /etc/dnsmasq.conf')
     system ('mv /etc/dhcpcd.conf.original /etc/dhcpcd.conf')
-    system ('cp -r /usr/lib/raspiwifi/reset_device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
+    system ('cp /usr/lib/raspiwifi/reset_device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
     system ('reboot')
   end
 
