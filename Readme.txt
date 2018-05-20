@@ -32,6 +32,9 @@ files for AP Host (configuration) mode, and reboot. When it finishes booting it
 should present itself in "Configuration Mode" as a WiFi access point with the
 name "RaspiWiFi[xxxx] Setup".
 
+== The original RaspiWiFi directory that you ran the Initial Setup is no longer
+needed after installation and can be safely deleted. All necessary files are
+copied to /usr/lib/raspiwifi/ on setup.
 
 
 USAGE:
