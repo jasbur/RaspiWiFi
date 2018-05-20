@@ -45,7 +45,6 @@ class Main < ActiveRecord::Base
 	end
 
   def self.set_ap_client_mode
-	raspiwifi_path = find_raspiwifi_path()
 	lsb_release_string = %x{lsb_release -a}
 
 	if lsb_release_string.include?('jessie')
