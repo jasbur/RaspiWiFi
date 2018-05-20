@@ -9,6 +9,7 @@ def install_prereqs():
 
 def copy_configs():
 	os.system('mkdir /usr/lib/raspiwifi')
+	os.system('mkdir /etc/raspiwifi')
 	os.system('cp -a libs/* /usr/lib/raspiwifi/')
 	os.system('rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
 	os.system('rm -f ./tmp/*')
