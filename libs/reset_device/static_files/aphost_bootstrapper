@@ -2,6 +2,6 @@
 
 python3 /usr/lib/raspi-wifi/reset_device/reset.py &
 
-su -c "/usr/lib/raspi-wifi/configuration_app/ && rails s -b 0.0.0.0 -e production -p 9191 -d"
+su -c "cd /usr/lib/raspi-wifi/configuration_app/ && rails s -b 0.0.0.0 -e production -p 9191 -d"
 
 hostapd -dd /etc/hostapd/hostapd.conf &
