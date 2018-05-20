@@ -45,14 +45,6 @@ class Main < ActiveRecord::Base
 	end
 
   def self.set_ap_client_mode
-	lsb_release_string = %x{lsb_release -a}
-
-	if lsb_release_string.include?('jessie')
-		system ('sudo cp -r /usr/lib/raspiwifi/reset_device/static_files/interfaces.apclient /etc/network/interfaces')
-	elsif lsb_release_string.include?('stretch')
-		system ('sudo rm /etc/network/interfaces')
-	end
-
     system ('rm /etc/cron.raspiwifi/aphost_bootstrapper')
     system ('sudo cp -r /usr/lib/raspiwifi/reset_device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
 		system ('chmod +x /etc/cron.raspiwifi/apclient_bootstrapper')
