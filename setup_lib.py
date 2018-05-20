@@ -1,8 +1,6 @@
 import os
 
 def install_prereqs():
-	project_path = os.path.dirname(os.path.abspath(__file__))
-
 	os.system('clear')
 	os.system('apt update')
 	os.system('clear')
