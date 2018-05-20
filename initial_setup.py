@@ -15,6 +15,7 @@ install_ans = input("Would you like run the initial RaspiWiFi setup (This can ta
 if(install_ans == 'y'):
 	setup_lib.install_prereqs()
 	setup_lib.copy_configs()
+	setup_lib.post_install_procs()
 
 else:
 	print()

@@ -8,10 +8,6 @@ def install_prereqs():
 	os.system('clear')
 	os.system('apt install python3 python3-rpi.gpio bundler nodejs libsqlite3-dev dnsmasq hostapd libxml2-dev libxslt-dev -y')
 	os.system('clear')
-	os.system('gem install nokogiri --no-document -v 1.6.6.2 -- --use-system-libraries')
-	os.system('clear')
-	os.system('bundle install --gemfile=' + project_path + '/Configuration\ App/Gemfile')
-	os.system('clear')
 
 def copy_configs():
 	os.system('mkdir /usr/lib/raspi-wifi')
@@ -27,3 +23,9 @@ def copy_configs():
 	os.system('sudo cp -a /usr/lib/raspi-wifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi')
 	os.system('echo "# RaspiWiFi Startup" >> /etc/crontab')
 	os.system('echo "@reboot root run-parts /etc/cron.raspiwifi/" >> /etc/crontab')
+
+def post_install_procs():
+	os.system('gem install nokogiri --no-document -v 1.6.6.2 -- --use-system-libraries')
+	os.system('clear')
+	os.system('bundle install --gemfile=' + project_path + '/Configuration\ App/Gemfile')
+	os.system('clear')
