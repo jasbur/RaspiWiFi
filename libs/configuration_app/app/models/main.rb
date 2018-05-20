@@ -1,7 +1,7 @@
 class Main < ActiveRecord::Base
 
 	def self.scan_wifi_networks
-    ap_list = %x{sudo iwlist scan}.split('Cell')
+    ap_list = %x{iwlist scan}.split('Cell')
     ap_array = Array.new
 
     ap_list.each{|ap_grouping|
@@ -40,18 +40,18 @@ class Main < ActiveRecord::Base
 
 		temp_conf_file.close
 
-		system('sudo cp -r ../tmp/wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
+		system('cp -r ../tmp/wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
 		system('rm ../tmp/wpa_supplicant.conf.tmp')
 	end
 
   def self.set_ap_client_mode
     system ('rm /etc/cron.raspiwifi/aphost_bootstrapper')
-    system ('sudo cp -r /usr/lib/raspiwifi/reset_device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
+    system ('cp -r /usr/lib/raspiwifi/reset_device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
 		system ('chmod +x /etc/cron.raspiwifi/apclient_bootstrapper')
-    system ('sudo mv /etc/dnsmasq.conf.original /etc/dnsmasq.conf')
-    system ('sudo mv /etc/dhcpcd.conf.original /etc/dhcpcd.conf')
-    system ('sudo cp -r /usr/lib/raspiwifi/reset_device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
-    system ('sudo reboot')
+    system ('mv /etc/dnsmasq.conf.original /etc/dnsmasq.conf')
+    system ('mv /etc/dhcpcd.conf.original /etc/dhcpcd.conf')
+    system ('cp -r /usr/lib/raspiwifi/reset_device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
+    system ('reboot')
   end
 
 end

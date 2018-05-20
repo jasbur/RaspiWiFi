@@ -43,4 +43,4 @@ print("Initial setup is complete. A reboot is required to start in WiFi configur
 reboot_ans = input("Would you like to do that now? (y/n): ")
 
 if reboot_ans == 'y':
-	os.system('sudo reboot')
+	os.system('reboot')
