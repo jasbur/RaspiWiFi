@@ -27,5 +27,5 @@ def copy_configs():
 def post_install_procs():
 	os.system('gem install nokogiri --no-document -v 1.6.6.2 -- --use-system-libraries')
 	os.system('clear')
-	os.system('bundle install --gemfile=' + project_path + '/Configuration\ App/Gemfile')
+	os.system('bundle install --gemfile=/usr/lib/raspi-wifi/configuration_app/Gemfile')
 	os.system('clear')
