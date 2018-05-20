@@ -20,21 +20,23 @@ this release.
 
  SCRIPT-BASED INSTALLATION INSTRUCTIONS:
 
-== Navigate to the directory you downloaded or cloned RaspiWiFi
+== Navigate to the directory where you downloaded or cloned RaspiWiFi
 
 == Run:
 
 sudo python3 initial_setup.py
 
-== This script will install all necessary prerequisites, copy configuration
-files, and reboot. When it finishes booting it should present itself in
-"Configuration Mode" as a WiFi access point with the name "RaspiWiFi Setup".
+== This script will install all necessary prerequisites, copy the project files
+to /usr/lib/raspiwifi/, copy configuration
+files for AP Host (configuration) mode, and reboot. When it finishes booting it
+should present itself in "Configuration Mode" as a WiFi access point with the
+name "RaspiWiFi[xxxx] Setup".
 
 
 
 USAGE:
 
-== Connect to the "RaspiWiFi Setup" access point using any other WiFi enabled
+== Connect to the "RaspiWiFi[xxxx] Setup" access point using any other WiFi enabled
 device.
 
 == Navigate to http://10.0.0.1:9191 using any web browser on the device you
@@ -60,4 +62,4 @@ or if incorrect connection information is ever entered. Just press and hold for
 10 seconds or longer.
 
 == You can also reset the device by running the manual_reset.py in the
-"Reset Device" directory
+/usr/lib/raspiwifi/reset_device directory as root or with sudo.
