@@ -21,6 +21,7 @@ def copy_configs():
 	os.system('sudo cp -a /usr/lib/raspi-wifi/reset_device/static_files/dhcpcd.conf /etc/')
 	os.system('mkdir /etc/cron.raspiwifi')
 	os.system('sudo cp -a /usr/lib/raspi-wifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi')
+	os.system('chmod +x /etc/cron.raspiwifi/aphost_bootstrapper')
 	os.system('echo "# RaspiWiFi Startup" >> /etc/crontab')
 	os.system('echo "@reboot root run-parts /etc/cron.raspiwifi/" >> /etc/crontab')
 
