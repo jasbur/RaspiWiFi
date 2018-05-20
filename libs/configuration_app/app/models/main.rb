@@ -48,17 +48,17 @@ class Main < ActiveRecord::Base
 	lsb_release_string = %x{lsb_release -a}
 
 	if lsb_release_string.include?('jessie')
-		system ('sudo cp -r /usr/lib/raspi-wifi/reset_device/static_files/interfaces.apclient /etc/network/interfaces')
+		system ('sudo cp -r /usr/lib/raspiwifi/reset_device/static_files/interfaces.apclient /etc/network/interfaces')
 	elsif lsb_release_string.include?('stretch')
 		system ('sudo rm /etc/network/interfaces')
 	end
 
     system ('rm /etc/cron.raspiwifi/aphost_bootstrapper')
-    system ('sudo cp -r /usr/lib/raspi-wifi/reset_device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
+    system ('sudo cp -r /usr/lib/raspiwifi/reset_device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
 		system ('chmod +x /etc/cron.raspiwifi/apclient_bootstrapper')
     system ('sudo mv /etc/dnsmasq.conf.original /etc/dnsmasq.conf')
     system ('sudo mv /etc/dhcpcd.conf.original /etc/dhcpcd.conf')
-    system ('sudo cp -r /usr/lib/raspi-wifi/reset_device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
+    system ('sudo cp -r /usr/lib/raspiwifi/reset_device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
     system ('sudo reboot')
   end
 

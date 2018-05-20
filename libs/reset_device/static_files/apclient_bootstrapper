@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python3 /usr/lib/raspi-wifi/reset_device/reset.py &
+python3 /usr/lib/raspiwifi/reset_device/reset.py &
