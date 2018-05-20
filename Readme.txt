@@ -2,7 +2,15 @@ RaspiWiFi
 
 RaspiWiFi is a program to headlessly configure a Raspberry Pi's WiFi
 connection using using any other WiFi-enabled device (much like the way
-a Chromecast or similar device can be configured). RaspiWiFi has been
+a Chromecast or similar device can be configured).
+
+It can also be used as a method to connect wirelessly point-to-point with your
+Pi when a network is not available or you do not want to connect to one. Just
+leave it in Configuration Mode, connect to the "RaspiWiFi[xxxx] Setup" access
+point. The Pi will be addressable at 10.0.0.1 using all the normal methods you
+might use while connected through a network.
+
+RaspiWiFi has been
 tested with the Raspberry Pi B+, Raspberry Pi 3, and Raspberry Pi Zero W.
 
 
@@ -53,6 +61,10 @@ encryption is enabled, leave the password box blank.
 
 == At this point your Raspberry Pi will reboot and connect to the access point
 specified.
+
+== You can also use the Pi in a point-to-point connection mode by leaving it in
+Configuration Mode. All services will be addresible in their normal way at
+10.0.0.1 while connected to the "RaspiWiFi[xxxx] Setup" AP.
 
 
 
