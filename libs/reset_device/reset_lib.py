@@ -1,5 +1,18 @@
 import os
 
+def config_file_hash():
+	config_file = open('raspiwifi.conf')
+	config_hash = {}
+
+	for line in config_file:
+		line_key = line.split("=")[0]
+		line_value = line.split("=")[1].rstrip()
+		config_hash[line_key] = line_value
+
+	return config_hash
+
+
+
 def reset_to_host_mode():
 	os.system('aplay /usr/lib/raspiwifi/reset_device/button_chime.wav')
 	os.system('rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
