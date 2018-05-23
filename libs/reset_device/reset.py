@@ -12,7 +12,7 @@ counter = 0
 serial_last_four = subprocess.check_output(['cat', '/proc/cpuinfo'])[-5:-1].decode('utf-8')
 hostapd_conf = open('/etc/hostapd/hostapd.conf', 'r')
 config_hash = reset_lib.config_file_hash()
-ssid_prefix = config_file_hash['ssid_prefix'] + " "
+ssid_prefix = config_hash['ssid_prefix'] + " "
 
 # Iterate through the installed hostapd.conf file to assign a device-specific SSID if none has been assigned
 for line in hostapd_conf:
