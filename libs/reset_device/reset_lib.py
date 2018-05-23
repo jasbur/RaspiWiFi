@@ -1,7 +1,7 @@
 import os
 
 def config_file_hash():
-	config_file = open('/usr/lib/raspiwifi/reset_device/static_files/raspiwifi.conf')
+	config_file = open('/etc/raspiwifi/raspiwifi.conf')
 	config_hash = {}
 
 	for line in config_file:
