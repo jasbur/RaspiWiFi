@@ -12,7 +12,7 @@ def config_file_hash():
 	return config_hash
 
 def hostapd_reset_check():
-	reset_required = True
+	reset_required == True
 
 	for line in hostapd_conf:
 	    if ssid_prefix in line:
