@@ -1,7 +1,6 @@
 import RPi.GPIO as GPIO
 import os
 import time
-import fileinput
 import subprocess
 import reset_lib
 
