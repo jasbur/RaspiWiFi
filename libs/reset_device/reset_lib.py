@@ -12,6 +12,7 @@ def config_file_hash():
 	return config_hash
 
 def hostapd_reset_check():
+	hostapd_conf = open('/etc/hostapd/hostapd.conf', 'r')
 	reset_required = True
 
 	for line in hostapd_conf:
