@@ -11,7 +11,22 @@ def config_file_hash():
 
 	return config_hash
 
+def hostapd_reset_check():
+	reset_required = True
 
+	for line in hostapd_conf:
+	    if ssid_prefix in line:
+	        reset_required = False
+
+	return reset_required
+
+def update_hostapd(ssid_prefix, serial_last_four):
+	os.system('cp -a /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf /etc/hostapd/')
+
+	with fileinput.FileInput("/etc/hostapd/hostapd.conf", inplace=True) as file:
+		for line in file:
+			print(line.replace("temp-ssid", ssid_prefix + serial_last_four), end='')
+			file.close
 
 def reset_to_host_mode():
 	os.system('aplay /usr/lib/raspiwifi/reset_device/button_chime.wav')

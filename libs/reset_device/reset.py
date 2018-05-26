@@ -11,19 +11,14 @@ GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 counter = 0
 serial_last_four = subprocess.check_output(['cat', '/proc/cpuinfo'])[-5:-1].decode('utf-8')
 hostapd_conf = open('/etc/hostapd/hostapd.conf', 'r')
+hostapd_reset_required = reset_lib.hostapd_reset_check()
 config_hash = reset_lib.config_file_hash()
 ssid_prefix = config_hash['ssid_prefix'] + " "
 
-# Iterate through the installed hostapd.conf file to assign a device-specific SSID if none has been assigned
-for line in hostapd_conf:
-    if "temp-ssid" in line:
-        with fileinput.FileInput("/etc/hostapd/hostapd.conf", inplace=True) as file:
-            for line in file:
-                print(line.replace("temp-ssid", ssid_prefix + serial_last_four), end='')
-                file.close
-        os.system('reboot')
-    else:
-        hostapd_conf.close
+
+if hostapd_reset_required = True:
+    reset_lib.update_hostapd(ssid_prefix, serial_last_four)
+    os.system('reboot')
 
 # This is the main logic loop waiting for a button to be pressed on GPIO 18 for 10 seconds.
 # If that happens the device will reset to its AP Host mode allowing for reconfiguration on a new network.
