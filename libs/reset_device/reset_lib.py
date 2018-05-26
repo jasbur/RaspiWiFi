@@ -11,7 +11,7 @@ def config_file_hash():
 
 	return config_hash
 
-def hostapd_reset_check():
+def hostapd_reset_check(ssid_prefix):
 	hostapd_conf = open('/etc/hostapd/hostapd.conf', 'r')
 	reset_required = True
 
