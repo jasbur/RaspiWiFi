@@ -16,7 +16,7 @@ config_hash = reset_lib.config_file_hash()
 ssid_prefix = config_hash['ssid_prefix'] + " "
 
 
-if hostapd_reset_required = True:
+if hostapd_reset_required == True:
     reset_lib.update_hostapd(ssid_prefix, serial_last_four)
     os.system('reboot')
 
