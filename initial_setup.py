@@ -19,7 +19,7 @@ entered_ssid = input("Would you like to specify an SSID you'd like to use for Ho
 if(install_ans == 'y'):
 	setup_lib.install_prereqs()
 	setup_lib.copy_configs()
-	setup_lib.save_entered_ssid(entered_ssid)
+	setup_lib.update_main_config_file(entered_ssid)
 	setup_lib.post_install_procs()
 
 else:
