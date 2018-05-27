@@ -7,7 +7,7 @@ while True:
     time.sleep(1)
 
     if reset_lib.is_wifi_active() == False:
-        print("No Connection for " + no_conn_counter + " seconds...")
+        print("No Connection for " + str(no_conn_counter) + " seconds...")
         no_conn_counter = no_conn_counter + 1
     else:
         print("Connection is active...")
