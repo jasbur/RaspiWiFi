@@ -10,11 +10,13 @@ print("##### RaspiWiFi Intial Setup  #####")
 print("###################################")
 print()
 print()
+entered_ssid = input("Custom SSID?: ")
 install_ans = input("Would you like run the initial RaspiWiFi setup (This can take up to 5 minutes)? (y/n): ")
 
 if(install_ans == 'y'):
 	setup_lib.install_prereqs()
 	setup_lib.copy_configs()
+	setup_lib.save_entered_ssid(entered_ssid)
 	setup_lib.post_install_procs()
 
 else:

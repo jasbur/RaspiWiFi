@@ -25,6 +25,9 @@ def copy_configs():
 	os.system('echo "@reboot root run-parts /etc/cron.raspiwifi/" >> /etc/crontab')
 	os.system('mv /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.conf /etc/raspiwifi')
 
+def save_entered_ssid(entered_ssid):
+	os.system('sed -i \'s/RaspiWiFi Setup/' + entered_ssid + '/\' /etc/raspiwifi/raspiwifi.conf')
+
 def post_install_procs():
 	os.system('gem install nokogiri --no-document -v 1.6.6.2 -- --use-system-libraries')
 	os.system('clear')
