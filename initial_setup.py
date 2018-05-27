@@ -16,11 +16,12 @@ print()
 print()
 entered_ssid = input("Would you like to specify an SSID you'd like to use for Host/Configuration mode? [default: RaspiWiFi Setup]: ")
 auto_config_choice = input("Would you like to enable auto-reconfiguration mode (y/n)? [default: n]: ")
+auto_config_delay = input("How long of a delay would you like without an active connection before auto-reconfiguration triggers (seconds)? [default: 300]: ")
 
 if(install_ans == 'y'):
 	setup_lib.install_prereqs()
 	setup_lib.copy_configs()
-	setup_lib.update_main_config_file(entered_ssid, auto_config_choice)
+	setup_lib.update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay)
 	setup_lib.post_install_procs()
 
 else:
