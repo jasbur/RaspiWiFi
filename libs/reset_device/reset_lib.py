@@ -1,5 +1,6 @@
 import os
 import fileinput
+import subprocess
 
 def config_file_hash():
 	config_file = open('/etc/raspiwifi/raspiwifi.conf')
@@ -29,6 +30,15 @@ def update_hostapd(ssid_prefix, serial_last_four):
 		for line in file:
 			print(line.replace("temp-ssid", ssid_prefix + serial_last_four), end='')
 			file.close
+
+def is_wifi_active():
+	iwconfig_out = subprocess.check_output(['iwconfig']).decode('utf-8')
+	wifi_active = True
+
+	if "Access Point: Not-Associated" in iwconfig_out:
+		wifi_active = False
+
+	return wifi_active
 
 def reset_to_host_mode():
 	os.system('aplay /usr/lib/raspiwifi/reset_device/button_chime.wav')
