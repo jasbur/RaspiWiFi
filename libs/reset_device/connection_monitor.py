@@ -1,5 +1,6 @@
 import time
 import sys
+import os
 import reset_lib
 
 no_conn_counter = 0
