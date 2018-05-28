@@ -5,7 +5,7 @@ import reset_lib
 no_conn_counter = 0
 config_hash = reset_lib.config_file_hash()
 
-if config_hash['auto_config'] == 0:
+if config_hash['auto_config'] == "0":
     sys.exit()
 else:
     while True:
