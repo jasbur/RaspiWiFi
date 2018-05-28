@@ -37,9 +37,9 @@ def is_wifi_active():
 
 	if "Access Point: Not-Associated" in iwconfig_out:
 		wifi_active = False
-		os.system('echo ' + iwconfig_out + ' >> /home/pi/iwout')
+		os.system('echo iwdata: ' + iwconfig_out + ' >> /home/pi/iwout')
 	else:
-		os.system('echo ' + iwconfig_out + ' >> /home/pi/iwout')
+		os.system('echo iwdata: ' + iwconfig_out + ' >> /home/pi/iwout')
 
 	return wifi_active
 
