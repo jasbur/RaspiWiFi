@@ -16,7 +16,9 @@ else:
             no_conn_counter = no_conn_counter + 10
             os.system('echo no conn counter: ' + str(no_conn_counter) + ' seconds >> /home/pi/connlog')
         else:
-            no_conn_counter = 0
+            time.sleep(1)
+            if reset_lib.is_wifi_active() == True:
+                no_conn_counter = 0
 
         if no_conn_counter >= int(config_hash['auto_config_delay']):
             reset_lib.reset_to_host_mode()
