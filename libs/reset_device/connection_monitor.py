@@ -14,7 +14,7 @@ else:
         time.sleep(10)
 
         if reset_lib.is_wifi_active() == False:
-            no_conn_counter = no_conn_counter + 10
+            no_conn_counter += 10
             consecutive_active_reports = 0
             os.system('echo no conn counter: ' + str(no_conn_counter) + ' seconds >> /home/pi/connlog')
         else:
