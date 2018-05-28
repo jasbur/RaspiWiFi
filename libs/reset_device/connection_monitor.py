@@ -19,6 +19,7 @@ else:
             os.system('echo no conn counter: ' + str(no_conn_counter) + ' seconds >> /home/pi/connlog')
         else:
             consecutive_active_reports += 1
+            no_conn_counter += 10
             os.system('echo consecutive_active_reports: ' + str(consecutive_active_reports) + ' >> /home/pi/connlog')
             if consecutive_active_reports >= 2:
                 no_conn_counter = 0
