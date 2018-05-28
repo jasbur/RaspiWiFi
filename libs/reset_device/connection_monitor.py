@@ -18,9 +18,9 @@ else:
             consecutive_active_reports = 0
             os.system('echo no conn counter: ' + str(no_conn_counter) + ' seconds >> /home/pi/connlog')
         else:
-            consecutive_active_reports = consecutive_active_reports + 1
+            consecutive_active_reports += 1
             os.system('echo consecutive_active_reports: ' + str(consecutive_active_reports) + ' >> /home/pi/connlog')
-            if consecutive_active_reports >= 3:
+            if consecutive_active_reports >= 2:
                 no_conn_counter = 0
 
         if no_conn_counter >= int(config_hash['auto_config_delay']):
