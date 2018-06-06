@@ -45,6 +45,29 @@ needed after installation and can be safely deleted. All necessary files are
 copied to /usr/lib/raspiwifi/ on setup.
 
 
+CONFIGURATION:
+
+== You will be prompted to set 3 variables during the Initial Setup Script:
+
+==== "SSID Prefix" [default: "RaspiWiFi Setup"]: This is the prefix of the SSID
+      that your Pi will broadcast for you to connect to during
+      Configuration Mode (Host Mode). The last four of you Pi's serial number
+      will be appended to whatever you enter here.
+
+==== "Auto-Config mode" [default: n]: If you choose to enable this mode your Pi
+      will check for an active connection while in normal operation mode (Client Mode).
+      If an active connection has been determined to be lost, the Pi will reboot
+      back into Configuration Mode (Host Mode) automatically.
+
+==== "Auto-Config delay" [default: 300 seconds]: This is the time in consecutive
+      seconds to wait with an inactive connection before triggering a reset into
+      Configuration Mode (Host Mode). This is only applicable if the
+      "Auto-Config mode" mentioned above is set to active.
+
+== All of these variables can be set at any time after the Initial Setup has
+been running by editing the /etc/raspiwifi/raspiwifi.conf
+
+
 USAGE:
 
 == Connect to the "RaspiWiFi[xxxx] Setup" access point using any other WiFi enabled
