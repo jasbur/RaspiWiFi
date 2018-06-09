@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <form action="{{ url_for('save_credentials') }}" method=post>
+    <select id="ssid" name="ssid", class="wifiNetworkInputs">
+      {% for ssid in wifi_ap_array %}
+        <option value='{{ ssid }}'>{{ ssid }}</option>
+      {% endfor %}
+    </select>
+
+    <input type="password" name="wifi_key">
+
+    <input type="submit">
+  </form>
+{% endblock %}
