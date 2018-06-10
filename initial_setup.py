@@ -22,8 +22,6 @@ if(install_ans == 'y'):
 	setup_lib.install_prereqs()
 	setup_lib.copy_configs()
 	setup_lib.update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay)
-	#setup_lib.post_install_procs()
-
 else:
 	print()
 	print()
