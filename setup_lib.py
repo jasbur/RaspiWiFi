@@ -4,7 +4,9 @@ def install_prereqs():
 	os.system('clear')
 	os.system('apt update')
 	os.system('clear')
-	os.system('apt install python3 python3-rpi.gpio bundler nodejs libsqlite3-dev dnsmasq hostapd libxml2-dev libxslt-dev -y')
+	os.system('apt install python3 python3-rpi.gpio python3-pip dnsmasq hostapd -y')
+	os.system('clear')
+	os.system('pip3 install flask')
 	os.system('clear')
 
 def copy_configs():
