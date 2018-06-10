@@ -19,6 +19,7 @@ def save_credentials():
     wifi_key = request.form['wifi_key']
 
     create_wpa_supplicant(ssid, wifi_key)
+    set_ap_client_mode()
 
     return render_template('save_credentials.html', ssid = ssid)
 
