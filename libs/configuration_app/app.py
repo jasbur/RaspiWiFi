@@ -51,9 +51,11 @@ def create_wpa_supplicant(ssid, wifi_key):
     temp_conf_file.write('	ssid="' + ssid + '"\n')
 
     if wifi_key == '':
-        temp_conf_file.write('	key_mgmt=NONE')
+        temp_conf_file.write('	key_mgmt=NONE\n')
     else:
-        temp_conf_file.write('	psk="' + wifi_key + '"')
+        temp_conf_file.write('	psk="' + wifi_key + '"\n')
+
+    temp_conf_file.write('	}')
 
     temp_conf_file.close
 
