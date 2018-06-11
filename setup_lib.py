@@ -4,7 +4,11 @@ def install_prereqs():
 	os.system('clear')
 	os.system('apt update')
 	os.system('clear')
-	os.system('apt install python3 python3-rpi.gpio bundler nodejs libsqlite3-dev dnsmasq hostapd libxml2-dev libxslt-dev -y')
+	os.system('apt install python3 python3-rpi.gpio python3-pip dnsmasq hostapd -y')
+	os.system('clear')
+	print("Installing Flask web server...")
+	print()
+	os.system('pip3 install flask')
 	os.system('clear')
 
 def copy_configs():
@@ -32,9 +36,3 @@ def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay)
 		os.system('sed -i \'s/auto_config=0/auto_config=1/\' /etc/raspiwifi/raspiwifi.conf')
 	if auto_config_delay != "":
 		os.system('sed -i \'s/auto_config_delay=300/auto_config_delay=' + auto_config_delay + '/\' /etc/raspiwifi/raspiwifi.conf')
-
-def post_install_procs():
-	os.system('gem install nokogiri --no-document -v 1.6.6.2 -- --use-system-libraries')
-	os.system('clear')
-	os.system('bundle install --gemfile=/usr/lib/raspiwifi/configuration_app/Gemfile')
-	os.system('clear')
