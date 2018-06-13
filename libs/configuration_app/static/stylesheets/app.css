@@ -107,6 +107,11 @@ select.wifiNetworkInputs {
     color: #fff;
 }
 
+.manualSSIDEntry{
+	font-size: .4em;
+	color: #fff;
+}
+
 /* Wifi Icon
 ---------------------------------------------------------*/
 
