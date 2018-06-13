@@ -41,7 +41,7 @@ div#mainContent form {
 
 label[for=ssid],
 label[for=wifi_key]{
-    font-size:2.5rem;
+    font-size:1.9rem;
 }
 
 /* Select
@@ -92,7 +92,8 @@ select.wifiNetworkInputs {
 
 .wifiNetworkInputs{
     width: 100%;
-    padding:2em 0;
+    padding:1em;
+    font-size: 1.4rem;
     color: #999;
     background: #111;
     border:#999 solid 1px;
@@ -100,7 +101,7 @@ select.wifiNetworkInputs {
 
 .wifiConnectButton{
     width: 100%;
-    margin:1em 0;
+    margin:2em 0;
     padding:.5em;
     background-color: #deab04;
     font-size: 2rem;
@@ -108,7 +109,7 @@ select.wifiNetworkInputs {
 }
 
 .manualSSIDEntry{
-	font-size: .4em;
+	font-size: 1rem;
 	color: #fff;
 }
 
