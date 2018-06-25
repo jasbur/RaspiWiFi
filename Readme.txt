@@ -32,7 +32,7 @@ this release.
 
 == Run:
 
-sudo python3 initial_setup.py
+sudo ./initial_setup.sh
 
 == This script will install all necessary prerequisites, copy the project files
 to /usr/lib/raspiwifi/, copy configuration
