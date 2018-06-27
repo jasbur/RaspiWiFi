@@ -1,7 +1,4 @@
 #!/bin/sh
-cd "$(dirname "$0")"
-
-set -xe
 
 install_prereqs() {
   apt-get update
