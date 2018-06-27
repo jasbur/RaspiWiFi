@@ -1,4 +1,7 @@
 #!/bin/sh
+
+set -e
+
 cd "$(dirname "$0")"
 
 cat <<'EOK'
@@ -12,7 +15,7 @@ echo
 read -p "Configuration mode SSID prefix [RaspiWiFi Setup]: " CONFIG_SSID
 read -p "Enable auto-reconfiguration mode ? [y/N]: " AUTO_CONFIG
 read -p "Auto-reconfiguration trigger delay (seconds) [300]: " AUTO_CONFIG_DELAY
-read -p "Confirm setup [y/N]: " GO_INSTALL
+read -p "Changes about to be committed to your Raspberry Pi. Continue? [y/N]: " GO_INSTALL
 
 # Setup has been cancelled
 if ! [ "x$GO_INSTALL" = "xy" ]; then
