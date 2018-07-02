@@ -44,7 +44,7 @@ update_config
 print_header 'RaspiWiFi Setup Complete'
 
 # Ask for reboot
-# read -p "Reboot to start configuration mode [y/N]: " GO_REBOOT
-# if [ "x$GO_REBOOT" = "xy" ]; then
-#   reboot
-# fi
+read -p "Reboot to start configuration mode [y/N]: " GO_REBOOT
+if [ "x$GO_REBOOT" = "xy" ]; then
+  reboot
+fi
