@@ -1,12 +1,14 @@
 #!/bin/sh
 
 install_prereqs() {
+  [ "x$DRY_RUN" = "xy" ] && return
   apt-get update
   apt-get install -y python3 python3-pip python3-rpi.gpio dnsmasq hostapd
   pip3 install -I 'Flask>=1.0.0'
 }
 
 copy_config() {
+  [ "x$DRY_RUN" = "xy" ] && return
   mkdir /usr/lib/raspiwifi
   mkdir /etc/raspiwifi
   cp -a libs/* /usr/lib/raspiwifi/
@@ -26,6 +28,7 @@ copy_config() {
 }
 
 update_config() {
+  [ "x$DRY_RUN" = "xy" ] && return
   sed -i "s/RaspiWiFi Setup/${CONFIG_SSID:-RaspiWiFi Setup}/" /etc/raspiwifi/raspiwifi.conf
   [ "x$AUTO_CONFIG" = "xy" ] && sed -i "s/auto_config=0/auto_config=1/" /etc/raspiwifi/raspiwifi.conf
   sed -i "s/auto_config_delay=300/auto_config_delay=${AUTO_CONFIG_DELAY:-300}/" /etc/raspiwifi/raspiwifi.conf
