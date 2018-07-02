@@ -4,17 +4,17 @@ set -e
 
 cd "$(dirname "$0")"
 
-# Ensure running as root
-if [[ $(/usr/bin/id -u) -ne 0 ]]; then
-    echo "This script needs to be ran as root."
-    echo "Please run: sudo $0"
-    exit 1
-fi
-
 # Detect dry_run
 if [ "x$1" = "xtest" ]; then
   DRY_RUN=y
   echo 'Running dry run, nothing will be applied.'
+fi
+
+# Ensure running as root
+if ! [ "x$DRY_RUN" = "xy" ] && [[ $(/usr/bin/id -u) -ne 0 ]]; then
+    echo "This script needs to be ran as root."
+    echo "Please run: sudo $0"
+    exit 1
 fi
 
 print_header() {
@@ -24,6 +24,7 @@ print_header() {
 }
 
 print_header 'RaspiWiFi Initial Setup'
+echo
 
 # Ask for settings
 read -p "Configuration mode SSID prefix [RaspiWiFi Setup]: " CONFIG_SSID
@@ -49,9 +50,10 @@ print_header 'Set config values' '='
 update_config
 
 print_header 'RaspiWiFi Setup Complete'
+echo
 
 # Ask for reboot
 read -p "Reboot to start configuration mode [y/N]: " GO_REBOOT
-if [ "x$GO_REBOOT" = "xy" ]; then
+if ! [ "x$DRY_RUN" = "xy" ] && [ "x$GO_REBOOT" = "xy" ]; then
   reboot
 fi
