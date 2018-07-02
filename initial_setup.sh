@@ -4,17 +4,24 @@ set -e
 
 cd "$(dirname "$0")"
 
-print_header() {
-  c=${2:-'#'}
-  line=$(head -c ${#1} < /dev/zero | tr '\0' $c)
-  printf "\n$c$c$c$line$c$c$c\n$c$c $1 $c$c\n$c$c$c$line$c$c$c\n"
-}
+# Ensure running as root
+if [[ $(/usr/bin/id -u) -ne 0 ]]; then
+    echo "This script needs to be ran as root."
+    echo "Please run: sudo $0"
+    exit 1
+fi
 
 # Detect dry_run
 if [ "x$1" = "xtest" ]; then
   DRY_RUN=y
   echo 'Running dry run, nothing will be applied.'
 fi
+
+print_header() {
+  c=${2:-'#'}
+  line=$(head -c ${#1} < /dev/zero | tr '\0' $c)
+  printf "\n$c$c$c$line$c$c$c\n$c$c $1 $c$c\n$c$c$c$line$c$c$c\n"
+}
 
 print_header 'RaspiWiFi Initial Setup'
 
