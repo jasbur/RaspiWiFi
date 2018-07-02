@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 print_header() {
   c=${2:-'#'}
   line=$(head -c ${#1} < /dev/zero | tr '\0' $c)
-  echo -e "\n$c$c$c$line$c$c$c\n$c$c $1 $c$c\n$c$c$c$line$c$c$c\n"
+  printf "\n$c$c$c$line$c$c$c\n$c$c $1 $c$c\n$c$c$c$line$c$c$c\n"
 }
 
 # Detect dry_run
