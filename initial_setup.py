@@ -25,7 +25,7 @@ install_ans = input("Are you ready to commit changes to the system? (y/n): ")
 if(install_ans == 'y'):
 	setup_lib.install_prereqs()
 	setup_lib.copy_configs()
-	setup_lib.update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay)
+	setup_lib.update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice)
 else:
 	print()
 	print()
