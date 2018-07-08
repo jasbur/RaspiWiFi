@@ -88,7 +88,7 @@ def config_file_hash():
 
 
 if __name__ == '__main__':
-    config_hash = reset_lib.config_file_hash()
+    config_hash = config_file_hash()
 
     if config_hash['ssl_enabled'] == "1":
         app.run(host = '0.0.0.0', port = 9191, ssl_context='adhoc')
