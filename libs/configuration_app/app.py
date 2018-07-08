@@ -75,6 +75,22 @@ def set_ap_client_mode():
     os.system('cp /usr/lib/raspiwifi/reset_device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
     os.system('reboot')
 
+def config_file_hash():
+    config_file = open('/etc/raspiwifi/raspiwifi.conf')
+    config_hash = {}
+
+    for line in config_file:
+        line_key = line.split("=")[0]
+        line_value = line.split("=")[1].rstrip()
+        config_hash[line_key] = line_value
+
+    return config_hash
+
 
 if __name__ == '__main__':
-    app.run(host = '0.0.0.0', port = 9191)
+    config_hash = reset_lib.config_file_hash()
+
+    if config_hash['ssl_enabled'] == "1":
+        app.run(host = '0.0.0.0', port = 9191, ssl_context='adhoc')
+    else:
+        app.run(host = '0.0.0.0', port = 9191)
