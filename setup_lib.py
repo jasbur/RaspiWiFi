@@ -29,10 +29,12 @@ def copy_configs():
 	os.system('echo "@reboot root run-parts /etc/cron.raspiwifi/" >> /etc/crontab')
 	os.system('mv /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.conf /etc/raspiwifi')
 
-def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay):
+def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice):
 	if entered_ssid != "":
 		os.system('sed -i \'s/RaspiWiFi Setup/' + entered_ssid + '/\' /etc/raspiwifi/raspiwifi.conf')
 	if auto_config_choice.lower() == "y":
 		os.system('sed -i \'s/auto_config=0/auto_config=1/\' /etc/raspiwifi/raspiwifi.conf')
 	if auto_config_delay != "":
 		os.system('sed -i \'s/auto_config_delay=300/auto_config_delay=' + auto_config_delay + '/\' /etc/raspiwifi/raspiwifi.conf')
+	if ssl_enabled_choice.lower() == "y":
+		os.system('sed -i \'s/ssl_enabled=0/ssl_enabled=1/\' /etc/raspiwifi/raspiwifi.conf')
