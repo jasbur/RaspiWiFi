@@ -8,7 +8,7 @@ def install_prereqs():
 	os.system('clear')
 	print("Installing Flask web server...")
 	print()
-	os.system('pip3 install flask')
+	os.system('pip3 install flask pyopenssl')
 	os.system('clear')
 
 def copy_configs():
