@@ -22,7 +22,7 @@ print()
 print()
 install_ans = input("Are you ready to commit changes to the system? (y/n): ")
 
-if(install_ans == 'y'):
+if(install_ans.lower() == 'y'):
 	setup_lib.install_prereqs()
 	setup_lib.copy_configs()
 	setup_lib.update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice)
@@ -51,5 +51,5 @@ print()
 print("Initial setup is complete. A reboot is required to start in WiFi configuration mode...")
 reboot_ans = input("Would you like to do that now? (y/n): ")
 
-if reboot_ans == 'y':
+if reboot_ans.lower() == 'y':
 	os.system('reboot')
