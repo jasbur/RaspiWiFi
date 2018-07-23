@@ -16,7 +16,7 @@ auto_config_choice = input("Would you like to enable \nauto-reconfiguration mode
 print()
 auto_config_delay = input("How long of a delay would you like without an active connection \nbefore auto-reconfiguration triggers (seconds)? [default: 300]: ")
 print()
-ssl_enabled_choice = input("Would you like to enable SSL during configuration mode (y/N)?: ")
+ssl_enabled_choice = input("Would you like to enable SSL during configuration mode \n(NOTICE: you will get a certificate ID error when connecting, \nbut traffic will be encrypted) (y/N)?: ")
 os.system('clear')
 print()
 print()
