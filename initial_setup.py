@@ -20,7 +20,7 @@ ssl_enabled_choice = input("Would you like to enable SSL during configuration mo
 os.system('clear')
 print()
 print()
-install_ans = input("Are you ready to commit changes to the system? (y/n): ")
+install_ans = input("Are you ready to commit changes to the system? (y/N): ")
 
 if(install_ans.lower() == 'y'):
 	setup_lib.install_prereqs()
