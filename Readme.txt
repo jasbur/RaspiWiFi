@@ -64,6 +64,13 @@ CONFIGURATION:
       Configuration Mode (Host Mode). This is only applicable if the
       "Auto-Config mode" mentioned above is set to active.
 
+==== "SSL Mode" [default: n]: With this option enabled your RaspiWifi
+      configuration page will be sent over an SSL encrypted connection (don't
+      forget the "s" when navigating to https://10.0.0.1:9191 when using
+      this mode). You will get a certificate error from your web browser when
+      connecting. The error is just a warning that the certificate has not been
+      verified by a third party but everything will be properly encrypted anyway.
+
 == All of these variables can be set at any time after the Initial Setup has
 been running by editing the /etc/raspiwifi/raspiwifi.conf
 
@@ -73,8 +80,8 @@ USAGE:
 == Connect to the "RaspiWiFi[xxxx] Setup" access point using any other WiFi enabled
 device.
 
-== Navigate to http://10.0.0.1:9191 using any web browser on the device you
-connected with.
+== Navigate to http://10.0.0.1:9191 (or https://10.0.0.1:9191 when using SSL
+mode) using any web browser on the device you connected with.
 
 == Select the WiFi connection you'd like your Raspberry Pi to connect to from
 the drop down list and enter its wireless password on the page provided. If no
