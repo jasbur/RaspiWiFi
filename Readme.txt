@@ -64,6 +64,14 @@ CONFIGURATION:
       Configuration Mode (Host Mode). This is only applicable if the
       "Auto-Config mode" mentioned above is set to active.
 
+==== "Server port" [default: 80]: This is the server port that the web server
+      hosting the Configuration App page will be listening on. If you change
+      this port make sure to add it to the end of the address when you're
+      connecting to it. For example, if you speficiy 12345 as the port number
+      you would navigate to the page like this: http://10.0.0.1:12345 If you
+      leave the port at the default setting [80] there is no need to specify the
+      port when navigating to the page.
+
 ==== "SSL Mode" [default: n]: With this option enabled your RaspiWifi
       configuration page will be sent over an SSL encrypted connection (don't
       forget the "s" when navigating to https://10.0.0.1:9191 when using
@@ -80,12 +88,15 @@ USAGE:
 == Connect to the "RaspiWiFi[xxxx] Setup" access point using any other WiFi enabled
 device.
 
-== Navigate to http://10.0.0.1:9191 (or https://10.0.0.1:9191 when using SSL
-mode) using any web browser on the device you connected with.
+== Navigate to [10.0.0.1], [raspiwifisetup.com], or
+[idliketoconfigurethewifionthisdevicenowplease.com] (I was debating whether this
+was funny or not and, yes, it was) using any web browser on the device you
+connected with. (don't forget to manually start with [https://] when using SSL mode)
 
 == Select the WiFi connection you'd like your Raspberry Pi to connect to from
 the drop down list and enter its wireless password on the page provided. If no
-encryption is enabled, leave the password box blank.
+encryption is enabled, leave the password box blank. You may also manually
+specify your network information by clicking on the "manual SSID entry ->" link.
 
 == Click the "Connect" button.
 
