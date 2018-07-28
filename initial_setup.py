@@ -16,6 +16,8 @@ auto_config_choice = input("Would you like to enable \nauto-reconfiguration mode
 print()
 auto_config_delay = input("How long of a delay would you like without an active connection \nbefore auto-reconfiguration triggers (seconds)? [default: 300]: ")
 print()
+server_port_choice = input("Which port would you like to use for the Configuration Page? [default: 80]: ")
+print()
 ssl_enabled_choice = input("Would you like to enable SSL during configuration mode \n(NOTICE: you will get a certificate ID error \nwhen connecting, but traffic will be encrypted) [y/N]?: ")
 os.system('clear')
 print()
@@ -25,7 +27,7 @@ install_ans = input("Are you ready to commit changes to the system? [y/N]: ")
 if(install_ans.lower() == 'y'):
 	setup_lib.install_prereqs()
 	setup_lib.copy_configs()
-	setup_lib.update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice)
+	setup_lib.update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice, server_port_choice)
 else:
 	print()
 	print()

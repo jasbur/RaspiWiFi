@@ -91,6 +91,6 @@ if __name__ == '__main__':
     config_hash = config_file_hash()
 
     if config_hash['ssl_enabled'] == "1":
-        app.run(host = '0.0.0.0', port = 9191, ssl_context='adhoc')
+        app.run(host = '0.0.0.0', port = config_hash['server_port'], ssl_context='adhoc')
     else:
-        app.run(host = '0.0.0.0', port = 9191)
+        app.run(host = '0.0.0.0', port = config_hash['server_port'])
