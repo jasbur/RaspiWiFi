@@ -34,10 +34,9 @@ this release.
 
 sudo python3 initial_setup.py
 
-== This script will install all necessary prerequisites, copy the project files
-to /usr/lib/raspiwifi/, copy configuration
-files for AP Host (configuration) mode, and reboot. When it finishes booting it
-should present itself in "Configuration Mode" as a WiFi access point with the
+== This script will install all necessary prerequisites and copy all necessary
+config and library files, then reboot. When it finishes booting it should
+present itself in "Configuration Mode" as a WiFi access point with the
 name "RaspiWiFi[xxxx] Setup".
 
 == The original RaspiWiFi directory that you ran the Initial Setup is no longer
