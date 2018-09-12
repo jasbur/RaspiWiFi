@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import subprocess
 import os
+import time
 
 app = Flask(__name__)
 app.debug = True
@@ -24,10 +25,12 @@ def save_credentials():
     wifi_key = request.form['wifi_key']
 
     create_wpa_supplicant(ssid, wifi_key)
-    set_ap_client_mode()
 
-    return render_template('save_credentials.html', ssid = ssid)
-
+    if wpa_auth_check() == True:
+        set_ap_client_mode()
+        return render_template('save_credentials.html', ssid = ssid)
+    else:
+        return redirect('/')
 
 
 
@@ -85,6 +88,21 @@ def config_file_hash():
         config_hash[line_key] = line_value
 
     return config_hash
+
+def wpa_auth_check():
+    os.system('wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf')
+
+    time.sleep(4)
+
+    wpa_cli_raw = subprocess.Popen(['wpa_cli', '-i', 'wlan0', 'status'], stdout=subprocess.PIPE)
+    wpa_cli_out, err = wpa_cli_raw.communicate()
+
+    if 'wpa_state=COMPLETED' in wpa_cli_out.decode('utf-8'):
+        os.system('pkill wpa_supplicant')
+        return True
+    else:
+        os.system('pkill wpa_supplicant')
+        return False
 
 
 if __name__ == '__main__':
