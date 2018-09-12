@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 import subprocess
 import os
 import time
 
 app = Flask(__name__)
+app.secret_key = 'some_secret'
 app.debug = True
 
 
@@ -30,6 +31,7 @@ def save_credentials():
         set_ap_client_mode()
         return render_template('save_credentials.html', ssid = ssid)
     else:
+        flash('The wireless key you entered seems to be invalid...')
         return redirect('/')
 
 
