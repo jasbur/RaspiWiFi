@@ -22,7 +22,7 @@
         <li><label for="wifi_key">Your Wifi password</label></li>
         <li><input type="password" name="wifi_key", class="wifiNetworkInputs"></li>
 
-        <input type="submit", class="wifiConnectButton">
+        <input type="submit", onclick="this.disabled=true;this.value='Connecting...';this.form.submit();", class="wifiConnectButton">
       </ul>
     </form>
   </div>
