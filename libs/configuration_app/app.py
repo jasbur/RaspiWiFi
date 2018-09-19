@@ -28,7 +28,7 @@ def save_credentials():
     create_wpa_supplicant(ssid, wifi_key)
 
     if wpa_auth_check() == True:
-        # set_ap_client_mode()
+        set_ap_client_mode()
         return render_template('save_credentials.html', ssid = ssid)
     else:
         flash("Incorrect wireless key")
