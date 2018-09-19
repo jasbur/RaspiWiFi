@@ -29,7 +29,7 @@ def save_credentials():
 
     if wpa_auth_check() == True:
         set_ap_client_mode()
-        return render_template('save_credentials.html', ssid = ssid)
+        return render_template('save_credentials.html', ssid = ssid, reboot_device = reboot_device)
     else:
         flash("Incorrect wireless key")
         return redirect('/')
@@ -78,7 +78,6 @@ def set_ap_client_mode():
     os.system('mv /etc/dnsmasq.conf.original /etc/dnsmasq.conf')
     os.system('mv /etc/dhcpcd.conf.original /etc/dhcpcd.conf')
     os.system('cp /usr/lib/raspiwifi/reset_device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
-    os.system('reboot')
 
 def config_file_hash():
     config_file = open('/etc/raspiwifi/raspiwifi.conf')
@@ -106,6 +105,8 @@ def wpa_auth_check():
         os.system('pkill wpa_supplicant')
         return False
 
+def reboot_device():
+    os.system('reboot')
 
 if __name__ == '__main__':
     config_hash = config_file_hash()
