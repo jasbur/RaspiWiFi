@@ -113,13 +113,17 @@ select.wifiNetworkInputs {
 	color: #fff;
 }
 
-.flashes {
+div#flashes {
   width: 100%;
-  height: 100px;
-  background-color: #deab04;
+  background-color: #c25454;
+  padding: 0 20px 0 0;
   text-align: center;
   font-size: 3rem;
   color: #fff;
+}
+
+div#flashes ul{
+  list-style: none;
 }
 
 /* Wifi Icon

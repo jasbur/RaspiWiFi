@@ -31,7 +31,7 @@ def save_credentials():
         set_ap_client_mode()
         return render_template('save_credentials.html', ssid = ssid)
     else:
-        flash('The wireless key you entered seems to be invalid...')
+        flash("Incorrect wireless key")
         return redirect('/')
 
 
