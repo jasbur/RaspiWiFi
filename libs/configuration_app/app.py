@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import subprocess
 import os
+import time
+from threading import Thread
 
 app = Flask(__name__)
 app.debug = True
@@ -24,7 +26,14 @@ def save_credentials():
     wifi_key = request.form['wifi_key']
 
     create_wpa_supplicant(ssid, wifi_key)
-    set_ap_client_mode()
+    
+    # Call set_ap_client_mode() in a thread otherwise the reboot will prevent
+    # the response from getting to the browser
+    def sleep_and_start_ap():
+        time.sleep(2)
+        set_ap_client_mode()
+    t = Thread(target=sleep_and_start_ap)
+    t.start()
 
     return render_template('save_credentials.html', ssid = ssid)
 
