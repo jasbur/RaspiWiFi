@@ -114,6 +114,18 @@ select.wifiNetworkInputs {
 	color: #fff;
 }
 
+div#saveCredentialsOutput{
+  width: 60%;
+  margin: 0 0 0 20%;
+  text-align: center;
+  font-size: 1.7em;
+}
+
+.saveCredentialsSSID{
+  color: #deab04;
+  font-size: 2em;
+}
+
 /* Wifi Icon
 ---------------------------------------------------------*/
 
