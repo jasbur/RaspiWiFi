@@ -26,7 +26,7 @@ def save_credentials():
     wifi_key = request.form['wifi_key']
 
     create_wpa_supplicant(ssid, wifi_key)
-    
+
     # Call set_ap_client_mode() in a thread otherwise the reboot will prevent
     # the response from getting to the browser
     def sleep_and_start_ap():
@@ -55,25 +55,25 @@ def scan_wifi_networks():
 
     return ap_array
 
+
 def create_wpa_supplicant(ssid, wifi_key):
-    temp_conf_file = open('wpa_supplicant.conf.tmp', 'w')
+    with open('wpa_supplicant.conf.tmp', 'w') as temp_conf_file:
 
-    temp_conf_file.write('ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\n')
-    temp_conf_file.write('update_config=1\n')
-    temp_conf_file.write('\n')
-    temp_conf_file.write('network={\n')
-    temp_conf_file.write('	ssid="' + ssid + '"\n')
+        temp_conf_file.write('ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\n')
+        temp_conf_file.write('update_config=1\n')
+        temp_conf_file.write('\n')
+        temp_conf_file.write('network={\n')
+        temp_conf_file.write('	ssid="' + ssid + '"\n')
 
-    if wifi_key == '':
-        temp_conf_file.write('	key_mgmt=NONE\n')
-    else:
-        temp_conf_file.write('	psk="' + wifi_key + '"\n')
+        if wifi_key == '':
+            temp_conf_file.write('	key_mgmt=NONE\n')
+        else:
+            temp_conf_file.write('	psk="' + wifi_key + '"\n')
 
-    temp_conf_file.write('	}')
-
-    temp_conf_file.close
+        temp_conf_file.write('	}')
 
     os.system('mv wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
+
 
 def set_ap_client_mode():
     os.system('rm /etc/cron.raspiwifi/aphost_bootstrapper')
@@ -84,14 +84,14 @@ def set_ap_client_mode():
     os.system('cp /usr/lib/raspiwifi/reset_device/static_files/isc-dhcp-server.apclient /etc/default/isc-dhcp-server')
     os.system('reboot')
 
-def config_file_hash():
-    config_file = open('/etc/raspiwifi/raspiwifi.conf')
-    config_hash = {}
 
-    for line in config_file:
-        line_key = line.split("=")[0]
-        line_value = line.split("=")[1].rstrip()
-        config_hash[line_key] = line_value
+def config_file_hash():
+    config_hash = {}
+    with open('/etc/raspiwifi/raspiwifi.conf', 'r') as config_file:
+        for line in config_file:
+            line_key = line.split("=")[0]
+            line_value = line.split("=")[1].rstrip()
+            config_hash[line_key] = line_value
 
     return config_hash
 
