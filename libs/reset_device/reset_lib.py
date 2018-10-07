@@ -36,7 +36,7 @@ def update_hostapd(ssid_prefix):
 
 def is_wifi_active():
 	iwconfig_out = subprocess.check_output(['iwconfig']).decode('utf-8')
-	return not "Access Point: Not-Associated" in iwconfig_out:
+	return not "Access Point: Not-Associated" in iwconfig_out
 
 
 def reset_to_host_mode():
