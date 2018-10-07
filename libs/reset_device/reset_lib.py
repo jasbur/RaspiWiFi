@@ -16,9 +16,9 @@ def config_file_hash():
 
 
 def hostapd_reset_check(ssid_prefix):
-	hostapd_conf = open('/etc/hostapd/hostapd.conf', 'r')
+    hostapd_conf = open('/etc/hostapd/hostapd.conf', 'r')
 
-	for line in hostapd_conf:
+    for line in hostapd_conf:
         if ssid_prefix in line:
             return False
 
@@ -27,16 +27,16 @@ def hostapd_reset_check(ssid_prefix):
 
 def update_hostapd(ssid_prefix):
     serial_last_four = subprocess.check_output(['cat', '/proc/cpuinfo'])[-5:-1].decode('utf-8')
-	os.system('cp -a /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf /etc/hostapd/')
+    os.system('cp -a /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf /etc/hostapd/')
 
-	with fileinput.FileInput("/etc/hostapd/hostapd.conf", inplace=True) as file:
-		for line in file:
-			print(line.replace("temp-ssid", ssid_prefix + serial_last_four), end='')
+    with fileinput.FileInput("/etc/hostapd/hostapd.conf", inplace=True) as file:
+        for line in file:
+            print(line.replace("temp-ssid", ssid_prefix + serial_last_four), end='')
 
 
 def is_wifi_active():
-	iwconfig_out = subprocess.check_output(['iwconfig']).decode('utf-8')
-	return not "Access Point: Not-Associated" in iwconfig_out:
+    iwconfig_out = subprocess.check_output(['iwconfig']).decode('utf-8')
+    return not "Access Point: Not-Associated" in iwconfig_out:
 
 
 def reset_to_host_mode():
@@ -52,3 +52,4 @@ def reset_to_host_mode():
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dnsmasq.conf /etc/')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dhcpcd.conf /etc/')
 	os.system('reboot')
+
