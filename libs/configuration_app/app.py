@@ -56,11 +56,10 @@ def scan_wifi_networks():
     return ap_array
 
 def create_wpa_supplicant(ssid, wifi_key):
-    temp_conf_file = open('wpa_supplicant.conf.tmp', 'w')
-
-    temp_conf_file.write('ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\n')
-    temp_conf_file.write('update_config=1\n')
-    temp_conf_file.write('\n')
+    os.system('cp /etc/wpa_supplicant/wpa_supplicant.conf.base wpa_supplicant.conf.tmp')
+    
+    temp_conf_file = open('wpa_supplicant.conf.tmp', 'a')
+    
     temp_conf_file.write('network={\n')
     temp_conf_file.write('	ssid="' + ssid + '"\n')
 
