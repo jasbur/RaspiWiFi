@@ -30,9 +30,15 @@ def copy_configs():
 	os.system('mv /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.conf /etc/raspiwifi')
 	os.system('touch /etc/raspiwifi/host_mode')
 
-def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice, server_port_choice):
+def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice, server_port_choice, wpa_enabled_choice, wpa_entered_key):
 	if entered_ssid != "":
 		os.system('sed -i \'s/RaspiWiFi Setup/' + entered_ssid + '/\' /etc/raspiwifi/raspiwifi.conf')
+	if wpa_enabled_choice.lower() == "y":
+		os.system('sed -i \'s/#auth_algs=1/auth_algs=1/\' /etc/hostapd/hostapd.conf')
+		os.system('sed -i \'s/#wpa=2/wpa=2/\' /etc/hostapd/hostapd.conf')
+		os.system('sed -i \'s/#wpa_key_mgmt=WPA-PSK/wpa_key_mgmt=WPA-PSK/\' /etc/hostapd/hostapd.conf')
+		os.system('sed -i \'s/#rsn_pairwise=CCMP/rsn_pairwise=CCMP/\' /etc/hostapd/hostapd.conf')
+		os.system('sed -i \'s/#wpa_passphrase=somepassword/wpa_passphrase=somepassword' + wpa_entered_key + '/\' /etc/hostapd/hostapd.conf')
 	if auto_config_choice.lower() == "y":
 		os.system('sed -i \'s/auto_config=0/auto_config=1/\' /etc/raspiwifi/raspiwifi.conf')
 	if auto_config_delay != "":
