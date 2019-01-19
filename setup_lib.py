@@ -33,9 +33,7 @@ def copy_configs():
 def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice, server_port_choice, wpa_enabled_choice, wpa_entered_key):
 	if entered_ssid != "":
 		os.system('sed -i \'s/RaspiWiFi Setup/' + entered_ssid + '/\' /etc/raspiwifi/raspiwifi.conf')
-	print("####################### Assessing WPA choice...")
 	if wpa_enabled_choice.lower() == "y":
-		print("#################### Enabling WPA.....")
 		os.system('sed -i \'s/#auth_algs=1/auth_algs=1/\' /etc/hostapd/hostapd.conf')
 		os.system('sed -i \'s/#wpa=2/wpa=2/\' /etc/hostapd/hostapd.conf')
 		os.system('sed -i \'s/#wpa_key_mgmt=WPA-PSK/wpa_key_mgmt=WPA-PSK/\' /etc/hostapd/hostapd.conf')
