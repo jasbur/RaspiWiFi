@@ -17,6 +17,7 @@ if (uninstall_answer.lower() == "y"):
 
     os.system('cp /usr/lib/raspiwifi/reset_device/static_files/wpa_supplicant.conf.default /etc/wpa_supplicant/wpa_supplicant.conf')
     os.system('chmod 600 /etc/wpa_supplicant/wpa_supplicant.conf')
+    os.system('mv /etc/wpa_supplicant/wpa_supplicant.conf.original /etc/wpa_supplicant/wpa_supplicant.conf')
     os.system('rm -rf /etc/raspiwifi')
     os.system('rm -rf /usr/lib/raspiwifi')
     os.system('rm -rf /etc/cron.raspiwifi')
