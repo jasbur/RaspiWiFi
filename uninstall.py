@@ -15,6 +15,7 @@ print()
 if (uninstall_answer.lower() == "y"):
     print('Uninstalling RaspiWiFi from your system...')
 
+    os.system('cp /usr/lib/raspiwifi/reset_device/static_files/wpa_supplicant.conf.default /etc/wpa_supplicant/wpa_supplicant.conf')
     os.system('rm -rf /etc/raspiwifi')
     os.system('rm -rf /usr/lib/raspiwifi')
     os.system('rm -rf /etc/cron.raspiwifi')
