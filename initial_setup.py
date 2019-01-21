@@ -19,7 +19,7 @@ entered_ssid = input("Would you like to specify an SSID you'd like to use \nfor 
 print()
 wpa_enabled_choice = input("Would you like WPA encryption enabled on the hotspot \nwhile in Configuration Mode? [y/N]:")
 print()
-wpa_entered_key = input("What password would you like to for WPA hotspot \naccess (if enabled above) [default: NO PASSWORD]:")
+wpa_entered_key = input("What password would you like to for WPA hotspot \naccess (if enabled above, \nMust be at least 8 characters) [default: NO PASSWORD]:")
 print()
 auto_config_choice = input("Would you like to enable \nauto-reconfiguration mode [y/N]?: ")
 print()
@@ -35,7 +35,7 @@ install_ans = input("Are you ready to commit changes to the system? [y/N]: ")
 
 if(install_ans.lower() == 'y'):
 	setup_lib.install_prereqs()
-	setup_lib.copy_configs()
+	setup_lib.copy_configs(wpa_enabled_choice)
 	setup_lib.update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice, server_port_choice, wpa_enabled_choice, wpa_entered_key)
 else:
 	print()

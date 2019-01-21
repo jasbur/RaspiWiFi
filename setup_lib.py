@@ -11,7 +11,7 @@ def install_prereqs():
 	os.system('pip3 install flask pyopenssl')
 	os.system('clear')
 
-def copy_configs():
+def copy_configs(wpa_enabled_choice):
 	os.system('mkdir /usr/lib/raspiwifi')
 	os.system('mkdir /etc/raspiwifi')
 	os.system('cp -a libs/* /usr/lib/raspiwifi/')
@@ -19,7 +19,12 @@ def copy_configs():
 	os.system('rm -f ./tmp/*')
 	os.system('mv /etc/dnsmasq.conf /etc/dnsmasq.conf.original')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dnsmasq.conf /etc/')
-	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf /etc/hostapd/')
+
+	if wpa_enabled_choice.lower() == "y":
+		os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf.wpa /etc/hostapd/hostapd.conf')
+	else:
+		os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf.nowpa /etc/hostapd/hostapd.conf')
+	
 	os.system('mv /etc/dhcpcd.conf /etc/dhcpcd.conf.original')
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dhcpcd.conf /etc/')
 	os.system('mkdir /etc/cron.raspiwifi')
@@ -34,11 +39,8 @@ def update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay,
 	if entered_ssid != "":
 		os.system('sed -i \'s/RaspiWiFi Setup/' + entered_ssid + '/\' /etc/raspiwifi/raspiwifi.conf')
 	if wpa_enabled_choice.lower() == "y":
-		os.system('sed -i \'s/#auth_algs=1/auth_algs=1/\' /etc/hostapd/hostapd.conf')
-		os.system('sed -i \'s/#wpa=2/wpa=2/\' /etc/hostapd/hostapd.conf')
-		os.system('sed -i \'s/#wpa_key_mgmt=WPA-PSK/wpa_key_mgmt=WPA-PSK/\' /etc/hostapd/hostapd.conf')
-		os.system('sed -i \'s/#rsn_pairwise=CCMP/rsn_pairwise=CCMP/\' /etc/hostapd/hostapd.conf')
-		os.system('sed -i \'s/#wpa_passphrase=somepassword/wpa_passphrase=' + wpa_entered_key + '/\' /etc/hostapd/hostapd.conf')
+		os.system('sed -i \'s/wpa_enabled=0/wpa_enabled=1/\' /etc/raspiwifi/raspiwifi.conf')
+		os.system('sed -i \'s/wpa_key=0/wpa_key=' + wpa_entered_key + '/\' /etc/raspiwifi/raspiwifi.conf')
 	if auto_config_choice.lower() == "y":
 		os.system('sed -i \'s/auto_config=0/auto_config=1/\' /etc/raspiwifi/raspiwifi.conf')
 	if auto_config_delay != "":
