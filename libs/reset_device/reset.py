@@ -16,8 +16,7 @@ reboot_required = False
 
 reboot_required = reset_lib.wpa_check_activate(config_hash['wpa_enabled'], config_hash['wpa_key'])
 
-if reset_lib.ssid_is_correct(ssid_prefix) == False:
-    reboot_required = reset_lib.update_hostapd(ssid_prefix, serial_last_four)
+reboot_required = reset_lib.update_ssid(ssid_prefix, serial_last_four)
 
 if reboot_required == True:
     print('REBOOT')

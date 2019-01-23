@@ -13,16 +13,6 @@ def config_file_hash():
 
 	return config_hash
 
-def ssid_is_correct(ssid_prefix):
-	hostapd_conf = open('/etc/hostapd/hostapd.conf', 'r')
-	ssid_correct = False
-
-	for line in hostapd_conf:
-	    if ssid_prefix in line:
-	        ssid_correct = True
-
-	return ssid_correct
-
 def update_wpa_key(wpa_key):
 	with fileinput.FileInput('/etc/hostapd/hostapd.conf', inplace=True) as hostapd_conf:
 		for line in hostapd_conf:
@@ -51,15 +41,22 @@ def wpa_check_activate(wpa_enabled, wpa_key):
 
 	return reboot_required
 
-def update_hostapd(ssid_prefix, serial_last_four):
+def update_ssid(ssid_prefix, serial_last_four):
 	reboot_required = False
+	ssid_correct = False
 
-	with fileinput.FileInput("/etc/hostapd/hostapd.conf", inplace=True) as file:
-		for line in file:
-			reboot_required = True
-			print(line.replace("temp-ssid", ssid_prefix + serial_last_four), end='')
-			file.close
+	with open('/etc/hostapd/hostapd.conf') as hostapd_conf:
+		for line in hostapd_conf:
+			if ssid_prefix in line:
+				ssid_correct = True
 
+	if ssid_correct == False:
+		with fileinput.FileInput("/etc/hostapd/hostapd.conf", inplace=True) as file:
+			for line in file:
+				reboot_required = True
+				print(line.replace("temp-ssid", ssid_prefix + serial_last_four), end='')
+				file.close
+			
 	return reboot_required
 
 def is_wifi_active():
