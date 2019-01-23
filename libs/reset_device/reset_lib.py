@@ -13,15 +13,15 @@ def config_file_hash():
 
 	return config_hash
 
-def hostapd_reset_check(ssid_prefix):
+def ssid_is_correct(ssid_prefix):
 	hostapd_conf = open('/etc/hostapd/hostapd.conf', 'r')
-	reset_required = True
+	ssid_correct = False
 
 	for line in hostapd_conf:
 	    if ssid_prefix in line:
-	        reset_required = False
+	        ssid_correct = True
 
-	return reset_required
+	return ssid_correct
 
 def update_wpa_key(wpa_key):
 	with fileinput.FileInput('/etc/hostapd/hostapd.conf', inplace=True) as hostapd_conf:
@@ -31,11 +31,36 @@ def update_wpa_key(wpa_key):
 			else:
 				print(line, end = '')
 
+def wpa_check_activate(wpa_enabled, wpa_key):
+	wpa_active = False
+	reboot_required = False
+
+	with open('/etc/hostapd/hostapd.conf') as hostapd_conf:
+		for line in hostapd_conf:
+			if 'wpa_passphrase' in line:
+				wpa_active = True
+
+	if wpa_enabled == '1' and wpa_active == False:
+		reboot_required = True
+		os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf.wpa /etc/hostapd/hostapd.conf')
+		update_wpa_key(wpa_key)
+
+	if wpa_enabled == '0' and wpa_active == True:
+		reboot_required = True
+		os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf.nowpa /etc/hostapd/hostapd.conf')
+
+	return reboot_required
+
 def update_hostapd(ssid_prefix, serial_last_four):
+	reboot_required = False
+
 	with fileinput.FileInput("/etc/hostapd/hostapd.conf", inplace=True) as file:
 		for line in file:
+			reboot_required = True
 			print(line.replace("temp-ssid", ssid_prefix + serial_last_four), end='')
 			file.close
+
+	return reboot_required
 
 def is_wifi_active():
 	iwconfig_out = subprocess.check_output(['iwconfig']).decode('utf-8')
