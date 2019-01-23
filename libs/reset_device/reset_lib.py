@@ -23,6 +23,14 @@ def hostapd_reset_check(ssid_prefix):
 
 	return reset_required
 
+def update_wpa_key(wpa_key):
+	with fileinput.FileInput('/etc/hostapd/hostapd.conf', inplace=True) as hostapd_conf:
+		for line in hostapd_conf:
+			if 'wpa_passphrase' in line:
+				print('wpa_passphrase=' + wpa_key)
+			else:
+				print(line, end = '')
+
 def update_hostapd(ssid_prefix, serial_last_four):
 	with fileinput.FileInput("/etc/hostapd/hostapd.conf", inplace=True) as file:
 		for line in file:
