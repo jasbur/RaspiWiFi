@@ -56,7 +56,7 @@ def save_wpa_credentials():
 
     def sleep_and_reboot_for_wpa():
         time.sleep(2)
-        print("REBOOT")
+        os.system('reboot')
 
     t = Thread(target=sleep_and_reboot_for_wpa)
     t.start()
