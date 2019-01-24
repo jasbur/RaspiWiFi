@@ -114,6 +114,15 @@ select.wifiNetworkInputs {
 	color: #fff;
 }
 
+div#wpaCredentialsForm{
+    margin: 60px 0 0 0;
+}
+
+.wpaEnabledCheckbox{
+    height: 46px;
+    width: 46px;
+}
+
 div#saveCredentialsOutput{
   width: 60%;
   margin: 0 0 0 20%;
