@@ -3,6 +3,7 @@ import subprocess
 import os
 import time
 from threading import Thread
+import fileinput
 
 app = Flask(__name__)
 app.debug = True
@@ -11,13 +12,17 @@ app.debug = True
 @app.route('/')
 def index():
     wifi_ap_array = scan_wifi_networks()
-
     return render_template('app.html', wifi_ap_array = wifi_ap_array)
 
 
 @app.route('/manual_ssid_entry')
 def manual_ssid_entry():
     return render_template('manual_ssid_entry.html')
+
+@app.route('/wpa_settings')
+def wpa_settings():
+    config_hash = config_file_hash()
+    return render_template('wpa_settings.html', wpa_key = config_hash['wpa_key'])
 
 
 @app.route('/save_credentials', methods = ['GET', 'POST'])
@@ -36,6 +41,20 @@ def save_credentials():
     t.start()
 
     return render_template('save_credentials.html', ssid = ssid)
+
+
+@app.route('/save_wpa_credentials', methods = ['GET', 'POST'])
+def save_wpa_credentials():
+    config_hash = config_file_hash()
+
+    def sleep_and_reboot_for_wpa():
+        time.sleep(2)
+        update_wpa()
+
+    t = Thread(target=sleep_and_reboot_for_wpa)
+    t.start()
+
+    return render_template('save_wpa_credentials.html', wpa_enabled = config_hash['wpa_enabled'], wpa_key = config_hash['wpa_key'])
 
 
 
@@ -83,6 +102,26 @@ def set_ap_client_mode():
     os.system('mv /etc/dnsmasq.conf.original /etc/dnsmasq.conf')
     os.system('mv /etc/dhcpcd.conf.original /etc/dhcpcd.conf')
     os.system('reboot')
+
+def update_wpa():
+    wpa_enabled = '0'
+    wpa_key = 'password'
+
+    with fileinput.FileInput('/etc/raspiwifi/raspiwifi.conf', inplace=True) as raspiwifi_conf:
+        for line in raspiwifi_conf:
+            if 'wpa_enabled=' in line:
+                line_array = line.split('=')
+                line_array[1] = wpa_enabled
+                print(line_array[0] + '=' + line_array[1])
+
+            if 'wpa_key=' in line:
+                line_array = line.split('=')
+                line_array[1] = wpa_key
+                print(line_array[0] + '=' + line_array[1])
+
+            if 'wpa_enabled=' not in line and 'wpa_key=' not in line:
+                print(line, end='')
+
 
 def config_file_hash():
     config_file = open('/etc/raspiwifi/raspiwifi.conf')
