@@ -13,14 +13,6 @@ def config_file_hash():
 
 	return config_hash
 
-def update_wpa_key(wpa_key):
-	with fileinput.FileInput('/etc/hostapd/hostapd.conf', inplace=True) as hostapd_conf:
-		for line in hostapd_conf:
-			if 'wpa_passphrase' in line:
-				print('wpa_passphrase=' + wpa_key)
-			else:
-				print(line, end = '')
-
 def wpa_check_activate(wpa_enabled, wpa_key):
 	wpa_active = False
 	reboot_required = False
@@ -33,7 +25,18 @@ def wpa_check_activate(wpa_enabled, wpa_key):
 	if wpa_enabled == '1' and wpa_active == False:
 		reboot_required = True
 		os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf.wpa /etc/hostapd/hostapd.conf')
-		update_wpa_key(wpa_key)
+
+	if wpa_enabled == '1':
+		with fileinput.FileInput('/etc/hostapd/hostapd.conf', inplace=True) as hostapd_conf:
+			for line in hostapd_conf:
+				if 'wpa_passphrase' in line:
+					if 'wpa_passphrase=' + wpa_key not in line:
+						print('wpa_passphrase=' + wpa_key)
+						os.system('reboot')
+					else:
+						print(line, end = '')
+				else:
+					print(line, end = '')
 
 	if wpa_enabled == '0' and wpa_active == True:
 		reboot_required = True
