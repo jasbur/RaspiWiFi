@@ -7,6 +7,12 @@
 
     <form action="{{ url_for('save_wpa_credentials') }}" method=post>
       <ul>
+        {% if wpa_enabled == '1': %}
+          <li><input type="checkbox" name="wpa_enabled" value="1" checked> WPA On/Off</li>
+        {% else: %}
+          <li><input type="checkbox" name="wpa_enabled" value="1"> WPA On/Off</li>
+        {% endif %}
+
         <li><label for="wpa_key">Current WPA Key</label></li>
         <li><input type="text" name="wpa_key" value={{wpa_key}} class="wifiNetworkInputs"></li>
 
