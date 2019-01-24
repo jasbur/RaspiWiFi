@@ -61,6 +61,7 @@ def save_wpa_credentials():
     t = Thread(target=sleep_and_reboot_for_wpa)
     t.start()
 
+    config_hash = config_file_hash()
     return render_template('save_wpa_credentials.html', wpa_enabled = config_hash['wpa_enabled'], wpa_key = config_hash['wpa_key'])
 
 
