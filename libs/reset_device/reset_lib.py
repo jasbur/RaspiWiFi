@@ -56,9 +56,12 @@ def update_ssid(ssid_prefix, serial_last_four):
 	if ssid_correct == False:
 		with fileinput.FileInput("/etc/hostapd/hostapd.conf", inplace=True) as file:
 			for line in file:
-				reboot_required = True
-				print(line.replace("temp-ssid", ssid_prefix + serial_last_four), end='')
-				file.close
+				if 'ssid=' in line:
+					line_array = line.split('=')
+					line_array[1] = ssid_prefix + ' ' + serial_last_four
+					print(line_array[0] + '=' + line_array[1])
+
+		reboot_required = True
 			
 	return reboot_required
 
