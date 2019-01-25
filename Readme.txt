@@ -107,6 +107,12 @@ specify your network information by clicking on the "manual SSID entry ->" link.
 == At this point your Raspberry Pi will reboot and connect to the access point
 specified.
 
+== You can view the current WPA encryption settings and change them from the main Web 
+Configuration interface. The current settings are visible in a panel in the upper 
+left corner of the screen. If you click the values in this display you will be taken 
+to a page where you can change them. If you change them your device will reboot to 
+enable the new configuration. 
+
 == You can also use the Pi in a point-to-point connection mode by leaving it in
 Configuration Mode. All services will be addresible in their normal way at
 10.0.0.1 while connected to the "RaspiWiFi[xxxx] Setup" AP.
