@@ -12,7 +12,9 @@ app.debug = True
 @app.route('/')
 def index():
     wifi_ap_array = scan_wifi_networks()
-    return render_template('app.html', wifi_ap_array = wifi_ap_array)
+    config_hash = config_file_hash()
+
+    return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash)
 
 
 @app.route('/manual_ssid_entry')

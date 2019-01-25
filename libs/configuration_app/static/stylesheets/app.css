@@ -40,6 +40,19 @@ div#mainContent form {
     margin-top:-2em;
 }
 
+div#wpaStatus{
+    padding: 4px;
+    margin: 0 0 10px 0;
+    width: 250px;
+    background-color: #928043;
+    text-align: left;
+    font-size: .3em;
+}
+
+div#wpaStatus a{
+    color: #fff;
+}
+
 label[for=ssid],
 label[for=wifi_key]{
     font-size:1.9rem;
