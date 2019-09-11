@@ -100,7 +100,7 @@ def create_wpa_supplicant(ssid, wifi_key):
 
     temp_conf_file.write('	}')
 
-    temp_conf_file.close
+    temp_conf_file.close()
 
     os.system('mv wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
 
