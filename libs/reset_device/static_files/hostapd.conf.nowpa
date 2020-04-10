@@ -1,4 +1,4 @@
 interface=wlan0
 driver=nl80211
-ssid=temp-ssid
+ssid=symphonist-temp
 channel=1

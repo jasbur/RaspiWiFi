@@ -16,7 +16,7 @@ else:
         time.sleep(10)
 
         # If iwconfig report no association with an AP add 10 to the "No
-        # Connection Couter"
+        # Connection Counter"
         if reset_lib.is_wifi_active() == False:
             no_conn_counter += 10
             consecutive_active_reports = 0
