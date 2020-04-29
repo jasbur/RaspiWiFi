@@ -1,8 +1,60 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-  <div id="mainContent">
-    <div id="wpaStatus">
+
+<div class="row justify-content-center">
+    <div class="col-md-6" style="margin-top: 5%">
+        <div class="panel-heading">
+            <h3 class="panel-title">WiFi Settings</h3>
+            <hr>
+            <div class="alert alert-warning" role="alert">
+                {% if config_hash['wpa_enabled'] == '1': %}
+                <a href="{{ url_for('wpa_settings') }}">Config Mode WPA: ENABLED</a>
+                <a href="{{ url_for('wpa_settings') }}">Key: {{ config_hash['wpa_key'] }}</a>
+                {% endif %}
+
+                {% if config_hash['wpa_enabled'] == '0': %}
+                <a href="{{ url_for('wpa_settings') }}">Config Mode WPA: DISABLED</a>
+                {% endif %}
+            </div>
+            <hr>
+        </div>
+        <div class="panel-body">
+            <form action="{{ url_for('save_credentials') }}" method=post role="form">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="ssid">Select your WiFi network</label>
+
+
+                        <select , class="form-control" id="ssid" name="ssid">
+                            {% for ssid in wifi_ap_array %}
+                            <option value='{{ ssid }}'>{{ ssid }}</option>
+                            {% endfor %}
+                        </select>
+                        <small id="emailHelp" class="form-text text-muted">Your credentials will stay local
+                            100%!</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="wifi_key">Your Wifi password</label>
+                        <input class="form-control" id="wifi_key" name="wifi_key" type="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Save credentials!</button>
+                    <hr>
+                    <h6><a href="{{ url_for('manual_ssid_entry') }}">Want to enter Credentials manually?</a></h6>
+                    <hr>
+                    <div class="row justify-content-center">
+                        <h6 style="color: gray">symphonist system 1.0 - databyte.ch - 2020</h6>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--
+    <div class="" id="wpaStatus">
       <ul>
         {% if config_hash['wpa_enabled'] == '1': %}
           <li><a href="{{ url_for('wpa_settings') }}">Config. Mode WPA: ENABLED</a></li>
@@ -17,26 +69,25 @@
 
     <h1>WiFi Setup</h1>
     <div class="wifiIcon"></div>
-
     <form action="{{ url_for('save_credentials') }}" method=post>
       <ul>
         <li><label for="ssid">Select your WiFi network</label></li>
 
         <li class="wifiNetwork">
-          <select id="ssid" name="ssid", class="wifiNetworkInputs">
+          <select , class="wifiNetworkInputs"id="ssid" name="ssid">
             {% for ssid in wifi_ap_array %}
               <option value='{{ ssid }}'>{{ ssid }}</option>
             {% endfor %}
           </select>
         </li>
 
-        <li><a href="{{ url_for('manual_ssid_entry') }}" class="manualSSIDEntry">manual SSID entry -></a></li>
+        <li><a class="manualSSIDEntry" href="{{ url_for('manual_ssid_entry') }}">manual SSID entry -></a></li>
 
         <li><label for="wifi_key">Your Wifi password</label></li>
-        <li><input type="password" name="wifi_key", class="wifiNetworkInputs"></li>
+        <li><input , class="wifiNetworkInputs"name="wifi_key" type="password"></li>
 
-        <input type="submit", class="wifiConnectButton">
+        <input ,class="btn-md btn-primary" type="submit">
       </ul>
     </form>
-  </div>
+  </div>-->
 {% endblock %}
