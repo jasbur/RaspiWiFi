@@ -129,7 +129,7 @@ You can also reset the device by running the `manual_reset.py` in the
 You can uninstall RaspiWiFi at any time by running:
    
 ```
-sudo python3 /usr/lib/raspiwifi/uninstall.python3
+sudo python3 /usr/lib/raspiwifi/uninstall.py
 ```
 
 You can also run it from the "libs/" directory from a fresh clone if you've 
