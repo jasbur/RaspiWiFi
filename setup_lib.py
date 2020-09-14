@@ -8,7 +8,7 @@ def install_prereqs():
 	os.system('clear')
 	print("Installing Flask web server...")
 	print()
-	os.system('pip3 install flask pyopenssl')
+	os.system('pip3 install flask flask_cors pyopenssl')
 	os.system('clear')
 
 def copy_configs(wpa_enabled_choice):
