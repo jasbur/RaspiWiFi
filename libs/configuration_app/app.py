@@ -69,7 +69,7 @@ def get_wifi_creds():
 
 # save wifi credentials on form submit
 @app.route('/app/save_wifi_creds', methods=['POST'])
-def get_wifi_creds():
+def save_wifi_creds():
     save_wifi_creds(request)
     return jsonify(success=True)
 
