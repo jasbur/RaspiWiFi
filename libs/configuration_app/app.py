@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 import subprocess
 import os
 import time
@@ -6,8 +7,8 @@ from threading import Thread
 import fileinput
 
 app = Flask(__name__)
+CORS(app)
 app.debug = True
-
 
 @app.route('/')
 def index():
@@ -15,7 +16,6 @@ def index():
     config_hash = config_file_hash()
 
     return render_template('app.html', wifi_ap_array = wifi_ap_array, config_hash = config_hash)
-
 
 @app.route('/manual_ssid_entry')
 def manual_ssid_entry():
@@ -29,18 +29,7 @@ def wpa_settings():
 
 @app.route('/save_credentials', methods = ['GET', 'POST'])
 def save_credentials():
-    ssid = request.form['ssid']
-    wifi_key = request.form['wifi_key']
-
-    create_wpa_supplicant(ssid, wifi_key)
-    
-    # Call set_ap_client_mode() in a thread otherwise the reboot will prevent
-    # the response from getting to the browser
-    def sleep_and_start_ap():
-        time.sleep(2)
-        set_ap_client_mode()
-    t = Thread(target=sleep_and_start_ap)
-    t.start()
+    save_wifi_creds(request)
 
     return render_template('save_credentials.html', ssid = ssid)
 
@@ -66,10 +55,39 @@ def save_wpa_credentials():
     config_hash = config_file_hash()
     return render_template('save_wpa_credentials.html', wpa_enabled = config_hash['wpa_enabled'], wpa_key = config_hash['wpa_key'])
 
+######## ALL MOBILE APP ROUTES ##########
 
+# ping to check if server is running
+@app.route('/app/ping', methods=['GET'])
+def ping():
+    return jsonify(success=True)
 
+# get wifi networks availble to the pi
+@app.route('/app/get_wifi_creds', methods=['GET'])
+def get_wifi_creds():
+    return jsonify(scan_wifi_networks())
+
+# save wifi credentials on form submit
+@app.route('/app/save_wifi_creds', methods=['POST'])
+def save_wifi_creds():
+    save_wifi_creds(request)
+    return jsonify(success=True)
 
 ######## FUNCTIONS ##########
+
+def save_wifi_creds(request):
+    ssid = request.form['ssid']
+    wifi_key = request.form['wifi_key']
+
+    create_wpa_supplicant(ssid, wifi_key)
+    
+    # Call set_ap_client_mode() in a thread otherwise the reboot will prevent
+    # the response from getting to the browser
+    def sleep_and_start_ap():
+        time.sleep(2)
+        set_ap_client_mode()
+    t = Thread(target=sleep_and_start_ap)
+    t.start()
 
 def scan_wifi_networks():
     iwlist_raw = subprocess.Popen(['iwlist', 'scan'], stdout=subprocess.PIPE)
