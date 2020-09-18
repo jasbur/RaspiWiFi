@@ -72,14 +72,15 @@ def get_wifi_creds():
 # save wifi credentials on form submit
 @app.route('/app/save_wifi_creds', methods=['POST'])
 def save_wifi_creds():
-    ssid = request.form['ssid']
-    wifi_key = request.form['wifi_key']
+    data = request.get_json()
+    ssid = data['ssid']
+    wifi_key = data['wifi_key']
     save_wifi_creds(ssid, wifi_key)
     return jsonify(success=True)
 
 ######## FUNCTIONS ##########
 
-def save_wifi_creds(request):
+def save_wifi_creds(ssid, wifi_key):
     create_wpa_supplicant(ssid, wifi_key)  
     # Call set_ap_client_mode() in a thread otherwise the reboot will prevent
     # the response from getting to the browser
