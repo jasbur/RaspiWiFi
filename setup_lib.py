@@ -1,5 +1,15 @@
 import os
 
+echo_crontab = 'echo "@reboot root run-parts /etc/cron.raspiwifi/" >> /etc/crontab'
+
+# this checks to see if crontab already has the @reboot
+# duplicate @reboot lines cause a breakage in the interface when pi is reset to host mode
+def crontab_has_reboot:
+    with open('/etc/crontab') as cron_file:
+         if '@reboot' in cron_file.read():
+             return True
+         else: return False
+
 def install_prereqs():
 	os.system('clear')
 	os.system('apt update')
@@ -31,7 +41,8 @@ def copy_configs(wpa_enabled_choice):
 	os.system('cp /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi')
 	os.system('chmod +x /etc/cron.raspiwifi/aphost_bootstrapper')
 	os.system('echo "# RaspiWiFi Startup" >> /etc/crontab')
-	os.system('echo "@reboot root run-parts /etc/cron.raspiwifi/" >> /etc/crontab')
+	if not crontab_has_reboot():
+	 os.system('echo "@reboot root run-parts /etc/cron.raspiwifi/" >> /etc/crontab')
 	os.system('mv /usr/lib/raspiwifi/reset_device/static_files/raspiwifi.conf /etc/raspiwifi')
 	os.system('touch /etc/raspiwifi/host_mode')
 

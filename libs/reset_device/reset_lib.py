@@ -60,7 +60,7 @@ def update_ssid(ssid_prefix, serial_last_four):
 					line_array = line.split('=')
 					line_array[1] = ssid_prefix + ' ' + serial_last_four
 					print(line_array[0] + '=' + line_array[1])
-				else:
+                                     				else:
 					print(line, end = '')
 
 		reboot_required = True
@@ -77,11 +77,12 @@ def is_wifi_active():
 	return wifi_active
 
 def reset_to_host_mode():
+    print("inside  reset to host mode")
 	if not os.path.isfile('/etc/raspiwifi/host_mode'):
 		os.system('aplay /usr/lib/raspiwifi/reset_device/button_chime.wav')
 		os.system('rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
 		os.system('rm -f /home/pi/Projects/RaspiWifi/tmp/*')
-		os.system('rm /etc/cron.raspiwifi/apclient_bootstrapper')
+		os.system('rm /etc/cron.raspiwifi/apclient_bootstrapper') # wasn't removed
 		os.system('cp /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi/')
 		os.system('chmod +x /etc/cron.raspiwifi/aphost_bootstrapper')
 		os.system('mv /etc/dhcpcd.conf /etc/dhcpcd.conf.original')
