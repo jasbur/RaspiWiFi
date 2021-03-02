@@ -77,7 +77,6 @@ def is_wifi_active():
 	return wifi_active
 
 def reset_to_host_mode():
-    print("inside  reset to host mode")
 	if not os.path.isfile('/etc/raspiwifi/host_mode'):
 		os.system('aplay /usr/lib/raspiwifi/reset_device/button_chime.wav')
 		os.system('rm -f /etc/wpa_supplicant/wpa_supplicant.conf')
