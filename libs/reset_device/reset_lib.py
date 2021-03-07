@@ -60,7 +60,7 @@ def update_ssid(ssid_prefix, serial_last_four):
 					line_array = line.split('=')
 					line_array[1] = ssid_prefix + ' ' + serial_last_four
 					print(line_array[0] + '=' + line_array[1])
-                                     				else:
+                else:
 					print(line, end = '')
 
 		reboot_required = True
