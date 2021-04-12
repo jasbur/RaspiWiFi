@@ -1,0 +1,29 @@
+<% for(let i =0;i<config.days_of_week.length;i++){ %>
+    <% for(let j =0;j<config.days_of_week[i].cycles.length;j++){ %>
+        <tr class="tr-shadow">
+            <td class="text-center align-middle"><%= config.days_of_week[i].day %></td>
+            <td class="text-center"><%= config.days_of_week[i].cycles[j].start %></td>
+            <td class="text-center"><%= config.days_of_week[i].cycles[j].duration %> s</td>
+            <td class="text-center">
+                <%if(config.days_of_week[i].cycles[j].status){%>
+                    <i class="zmdi zmdi-check zmdi-hc-3x" style="color:green" onclick="change_status(<%=config.days_of_week[i].cycles[j].ID%>, '<%=config.days_of_week[i].day%>', this)"></i>
+                <%}else{%>
+                    <i class="zmdi zmdi-close zmdi-hc-3x" style="color:red" onclick="change_status(<%=config.days_of_week[i].cycles[j].ID%>, '<%=config.days_of_week[i].day%>', this)"></i>
+                <%}%>
+            </td>
+            <td>
+                <div class="table-data-feature">
+                <a href="/edit/cycle/<%=config.days_of_week[i].day%>/<%=config.days_of_week[i].cycles[j].ID%>">
+                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                    <i class="zmdi zmdi-edit"></i>
+                </button>
+                </a>
+                    <button class="item" data-toggle="tooltip" data-placement="top" title="Delete"  onclick="delete_cycle(<%=config.days_of_week[i].cycles[j].ID%>, '<%=config.days_of_week[i].day%>')">
+                        <i class="zmdi zmdi-delete"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        <tr class="spacer"></tr>
+    <%}%>
+<%}%>

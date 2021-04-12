@@ -1,0 +1,108 @@
+:root{
+    --picktim-container-width: 150px;
+    --picktim-container-height: 120px;
+}
+.picktim-container{
+    position: absolute;
+    width: var(--picktim-container-width);
+    height: var(--picktim-container-height);
+    border: 2px #DDD solid;
+    border-radius: 3px;
+    background: #EEE;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.42857143;
+    box-sizing: border-box;
+}
+.picktim-table{
+    text-align: center;
+    width: calc(var(--picktim-container-width) - 4px);
+    height: calc(var(--picktim-container-height) - 4px);
+    background-color: transparent;
+}
+
+.picktim-hour{
+    width: 50px;
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background: none;
+}
+
+.picktim-mins{
+    width: 50px;
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background: none;
+}
+.picktim-ampm{
+    width: 50px;
+    border: none;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    background: none;
+    cursor: pointer;
+}
+
+.picktim-separator{
+    border: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.picktim-btn{
+    cursor: pointer;
+    width: 50px !important;
+    border-radius: 3px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid transparent;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+}
+.picktim-btn:hover, .picktim-btn:focus{
+    background-color: rgba(255,255,255,0.5);
+    text-decoration: none;
+}
+.picktim-btn:active{
+    text-decoration: none;
+}
+.picktim-btn:disabled{
+    cursor: default;
+    opacity: 0.65;
+    box-shadow: none;
+}
+.picktim-clear{
+    position: relative;
+    top: 0px;
+    left: -40px;
+}
+.picktim-clear:active{
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    color: rgba(255,255,255,0.5);
+    outline: 0;
+    background-image: none;
+}

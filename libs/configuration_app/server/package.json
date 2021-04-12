@@ -1,0 +1,19 @@
+{
+  "name": "feeder_weedie",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "AIOTIK C.A.",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "file-system": "^2.2.2",
+    "path": "^0.12.7",
+    "shelljs": "^0.8.3"
+  }
+}
