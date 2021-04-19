@@ -7,24 +7,9 @@ if os.getuid():
     sys.exit('You need root access to install!')
 
 
-if(install_ans.lower() == 'y'):
-    setup_lib.install_prereqs()
-    setup_lib.copy_configs()
-else:
-    print()
-    print()
-    print("===================================================")
-    print("---------------------------------------------------")
-    print()
-    print("RaspiWiFi installation cancelled. Nothing changed...")
-    print()
-    print("---------------------------------------------------")
-    print("===================================================")
-    print()
-    print()
-    sys.exit()
+setup_lib.install_prereqs()
+setup_lib.copy_configs()
 
-os.system('clear')
 print()
 print()
 print("#####################################")
