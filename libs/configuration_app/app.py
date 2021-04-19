@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import subprocess
 import os
 import time
@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.debug = True
 
 
-@app.route('/')
+@app.route('/portal')
 def index():
     wifi_ap_array = scan_wifi_networks()
     config_hash = config_file_hash()
@@ -72,7 +72,7 @@ def save_wpa_credentials():
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
-    return redirect(url_for('index'))
+    return redirect("http://10.0.0.1/portal")
 
 
 ######## FUNCTIONS ##########
