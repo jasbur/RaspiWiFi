@@ -28,6 +28,10 @@ def copy_configs():
 
     os.system('mv /etc/dhcpcd.conf /etc/dhcpcd.conf.original')
     os.system('cp /usr/lib/raspiwifi/reset_device/static_files/dhcpcd.conf /etc/')
+    os.system(
+        'cp /usr/lib/raspiwifi/reset_device/static_files/portal.service /etc/systemd/system/')
+    os.system('systemctl enable portal.service')
+    os.system('systemctl start portal.service')
     os.system('mkdir /etc/cron.raspiwifi')
     os.system(
         'cp /usr/lib/raspiwifi/reset_device/static_files/aphost_bootstrapper /etc/cron.raspiwifi')
