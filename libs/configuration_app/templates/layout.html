@@ -13,11 +13,13 @@
     <title>RaspiWiFi Setup</title>
   </head>
   <body>
-    <img
-      src="{{ url_for('static', filename='logo.svg') }}"
-      width="200"
-      height="200"
-    />
+    <div class="logo-container">
+      <img
+        src="{{ url_for('static', filename='logo.svg') }}"
+        width="120"
+        height="120"
+      />
+    </div>
     {% block body %} {% endblock %}
   </body>
 </html>
