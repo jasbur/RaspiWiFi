@@ -87,7 +87,10 @@ def scan_wifi_networks():
     ap_list, err = iwlist_raw.communicate()
     ap_array = []
 
-    for line in ap_list.decode('utf-8').rsplit('\n'):
+    # The output of iwscan is a series of ascii bytes containing utf8 escape
+    # characters. First parse the unicode escape sequences (\xAA) then decode
+    # the utf8 contents.
+    for line in ap_list.decode('unicode-escape').encode('latin1').decode('utf8').rsplit('\n'):
         if 'ESSID' in line:
             ap_ssid = line[27:-1]
             if ap_ssid != '':
@@ -126,7 +129,7 @@ def set_ap_client_mode():
     os.system('chmod +x /etc/cron.raspiwifi/apclient_bootstrapper')
     os.system('mv /etc/dnsmasq.conf.original /etc/dnsmasq.conf')
     os.system('mv /etc/dhcpcd.conf.original /etc/dhcpcd.conf')
-    os.system('reboot')
+    os.system('reboot now')
 
 
 def update_wpa(wpa_enabled, wpa_key):
