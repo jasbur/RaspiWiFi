@@ -74,7 +74,8 @@ def update_ssid(ssid_prefix, serial_last_four):
 
 
 def is_wifi_active():
-    iwconfig_out = subprocess.check_output(['iwconfig']).decode('utf-8')
+    iwconfig_out = subprocess.check_output(
+        ['iwconfig', 'wlan0']).decode('utf-8')
     wifi_active = True
 
     if "Access Point: Not-Associated" in iwconfig_out:
