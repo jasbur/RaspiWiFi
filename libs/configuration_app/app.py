@@ -68,7 +68,12 @@ def save_wpa_credentials():
     return render_template('save_wpa_credentials.html', wpa_enabled=config_hash['wpa_enabled'], wpa_key=config_hash['wpa_key'])
 
 
-# Captive portal redirect.
+# On mobile devices, captive portal detection requires that HTTP requests to
+# certain well-known urls return the correct status code. For example, on
+# Android devices an HTTP request is sent to
+# http://clients1.google.com/generate_204 and if the response is not status 204
+# it is assumed to be a captive portal. We ensure this logic works correctly by
+# returning an HTTP 302 that specifies the location of this web app.
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
