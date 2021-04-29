@@ -4,6 +4,6 @@ python /usr/lib/raspiwifi/configuration_app/rtcTime.py &
 
 python /usr/lib/raspiwifi/configuration_app/feedTimer.py & 
 
-sudo node /usr/lib/raspiwifi/configuration_app/app.js &
+sudo node /usr/lib/raspiwifi/configuration_app/server/app.js &
 
 hostapd -dd /etc/hostapd/hostapd.conf &
