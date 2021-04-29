@@ -39,7 +39,7 @@ function change_system_hour(req, res, next){
 
 function dashboard(req, res, next){
     let obj;
-    fs.readFile('./device_config/device_config.json', 'utf8', function (err, data) {
+    fs.readFile('device_config/device_config.json', 'utf8', function (err, data) {
         if (err){
             console.log(err);
             res.sendStatus(500);
@@ -102,7 +102,7 @@ function edit_cycle(req, res, next){
     let day = req.params.day;
     let cycle_ID = req.params.ID;
     let obj;
-    fs.readFile('./device_config/device_config.json', 'utf8', function (err, data) {
+    fs.readFile('device_config/device_config.json', 'utf8', function (err, data) {
         if (err){
             console.log(err);
             res.sendStatus(500);

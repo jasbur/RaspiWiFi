@@ -21,7 +21,7 @@ function change_hour(req, res, next){
 function system_test(req, res, next){
     let test_duration = parseFloat(req.body.duration);
     let obj;
-    fs.readFile('./device_config/device_config.json', 'utf8', function (err, data) {
+    fs.readFile('device_config/device_config.json', 'utf8', function (err, data) {
         if (err){
             console.log(err);
             res.sendStatus(500);
@@ -47,7 +47,7 @@ function reset(req, res, next){
 
 function save_config(new_config){
     JSON.stringify(new_config)
-    fs.writeFileSync('./device_config/device_config.json', JSON.stringify(new_config));
+    fs.writeFileSync('device_config/device_config.json', JSON.stringify(new_config));
     console.log("saved");
     return;
 }

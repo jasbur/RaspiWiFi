@@ -17,7 +17,7 @@ function delete_cycle(req, res, next){
     let cycle_ID = req.body.cycle_ID;
     let day = req.body.day;
     let obj;
-    fs.readFile('./device_config/device_config.json', 'utf8', function (err, data) {
+    fs.readFile('device_config/device_config.json', 'utf8', function (err, data) {
         if (err){
             console.log(err);
             res.sendStatus(500);
@@ -81,7 +81,7 @@ function set_cycle_status(req, res, next){
     let new_status = req.body.new_status;
 
     console.log(req.body);
-    fs.readFile('./device_config/device_config.json', 'utf8', function (err, data) {
+    fs.readFile('device_config/device_config.json', 'utf8', function (err, data) {
         if (err){
             console.log(err);
             res.sendStatus(500);
@@ -116,7 +116,7 @@ function set_cycle_duration(req, res, next){
     let day = req.body.day;
     let cycle_ID = req.body.cycle_ID;
     let new_duration = req.body.new_duration;
-    fs.readFile('./device_config/device_config.json', 'utf8', function (err, data) {
+    fs.readFile('device_config/device_config.json', 'utf8', function (err, data) {
         if (err){
             console.log(err);
             res.sendStatus(500);
@@ -156,7 +156,7 @@ function edit_cycle(req, res, next){
     }else{
         new_status = false;
     }
-    fs.readFile('./device_config/device_config.json', 'utf8', function (err, data) {
+    fs.readFile('device_config/device_config.json', 'utf8', function (err, data) {
         if (err){
             console.log(err);
             res.sendStatus(500);
@@ -194,7 +194,7 @@ function new_cycle(req, res, next){
     let duration = req.body.duration;
     let is_activated = req.body.status;
     console.log(req.body);
-    fs.readFile('./device_config/device_config.json', 'utf8', function (err, data) {
+    fs.readFile('device_config/device_config.json', 'utf8', function (err, data) {
         if (err){
             console.log(err);
             res.sendStatus(500);
@@ -240,7 +240,7 @@ function get_config(req, res, next){
         days_of_week:[]
     }
     
-    fs.readFile('./device_config/device_config.json', 'utf8', function (err, data) {
+    fs.readFile('device_config/device_config.json', 'utf8', function (err, data) {
         if (err){
             console.log(err);
             res.sendStatus(500);
@@ -323,7 +323,7 @@ function get_config(req, res, next){
 
 function save_config(new_config){
     JSON.stringify(new_config)
-    fs.writeFileSync('./device_config/device_config.json', JSON.stringify(new_config));
+    fs.writeFileSync('device_config/device_config.json', JSON.stringify(new_config));
     console.log("saved");
     return;
 }
