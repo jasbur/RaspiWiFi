@@ -166,27 +166,22 @@ class ServerThread(threading.Thread):
 
     def __init__(self, app):
         threading.Thread.__init__(self)
-        self.srv = make_server('0.0.0.0', 80, app)
+        self.srv = make_server('0.0.0.0', 80, app, threaded=True)
         self.ctx = app.app_context()
         self.ctx.push()
 
     def run(self):
-        log.info('starting server')
+        print('starting server')
         self.srv.serve_forever()
 
     def shutdown(self):
+        print('shutting down server')
         self.srv.shutdown()
 
 
-def start_server():
-    global server
-    server = ServerThread(app)
-    server.start()
-    server.join()
-
+server = ServerThread(app)
 
 def stop_server():
-    global server
     server.shutdown()
 
 
@@ -201,7 +196,8 @@ if __name__ == '__main__':
     print("starting access point in host mode")
     manager.start_access_point()
     print("starting flask")
-    start_server()
+    server.start()
+    server.join()
     print("stopped flask")
     print("stopping host mode access point")
     manager.stop_access_point()
