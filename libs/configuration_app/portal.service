@@ -2,10 +2,8 @@
 Description=captive portal service
 
 [Service]
-ExecStart=/usr/bin/python3 -u /usr/lib/raspiwifi/configuration_app/app.py
+ExecStart=/usr/bin/python3 -u /home/pi/RaspiWiFi/libs/configuration_app/app.py
 WorkingDirectory=/home/pi
-Restart=on-failure
-RestartSec=5s
 
 [Install]
 WantedBy=multi-user.target

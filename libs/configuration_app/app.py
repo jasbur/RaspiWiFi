@@ -181,7 +181,6 @@ def stop_after_timeout():
     server.shutdown()
 
 
-
 if __name__ == '__main__':
     config_hash = config_file_hash()
 
