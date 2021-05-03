@@ -17,8 +17,11 @@ dnsmasq = subprocess.Popen(["dnsmasq", "--interface=wlan0",
 
 file, name = tempfile.mkstemp()
 
+serial_last_four = subprocess.getoutput(
+    "cat /proc/cpuinfo | grep Serial | awk '{print $3}'")[-4:]
+
 hostapd_config = open(name, 'w')
-hostapd_config.write('interface=wlan0\ndriver=nl80211\nssid=plantos-e123\nchannel=1')
+hostapd_config.write('interface=wlan0\ndriver=nl80211\nssid=plantos-' + serial_last_four + '\nchannel=1')
 hostapd_config.close()
 
 print("wrote hostapd config file {}".format(name))
