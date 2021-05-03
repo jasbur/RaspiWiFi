@@ -38,6 +38,11 @@ def save_credentials():
 
     create_wpa_supplicant(ssid, wifi_key)
 
+    # Kill flask and proceed to start the AP in client mode.
+    shutdown_hook = request.environ.get('werkzeug.server.shutdown')
+    if shutdown_hook is not None:
+        shutdown_hook()
+
     return render_template('save_credentials.html', ssid=ssid)
 
 
