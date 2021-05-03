@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 import subprocess
 import os
 import time
-from threading import Thread
+import threading
 import fileinput
 from access_point_manager import AccessPointManager
 
