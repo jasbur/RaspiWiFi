@@ -159,8 +159,21 @@ def config_file_hash():
     return config_hash
 
 
+def stop_after_timeout():
+    time.sleep(1 * 60)
+    print("Timeout reached. Stopping server.")
+    shutdown_hook = request.environ.get('werkzeug.server.shutdown')
+    if shutdown_hook is not None:
+        shutdown_hook()
+
+
 if __name__ == '__main__':
     config_hash = config_file_hash()
+
+    # Stop the server after a timeout.
+    thread = threading.Thread(target=stop_after_timeout, args=())
+    thread.daemon = True                            # Daemonize thread
+    thread.start()                                  # Start the execution
 
     print("starting access point in host mode")
     manager.start_access_point()
