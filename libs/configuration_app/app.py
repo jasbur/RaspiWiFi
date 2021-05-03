@@ -176,7 +176,7 @@ def config_file_hash():
 
 
 def stop_after_timeout():
-    time.sleep(1 * 60)
+    time.sleep(5 * 60)
     print("Timeout reached. Stopping server.")
     server.shutdown()
 
