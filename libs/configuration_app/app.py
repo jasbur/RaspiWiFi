@@ -4,6 +4,9 @@ import os
 import time
 from threading import Thread
 import fileinput
+import access_point_manager
+
+manager = AccessPointManager()
 
 app = Flask(__name__)
 app.debug = True
@@ -49,12 +52,10 @@ def save_wpa_credentials():
     else:
         update_wpa(0, wpa_key)
 
-    def sleep_and_reboot_for_wpa():
-        time.sleep(2)
-        os.system('reboot')
-
-    t = Thread(target=sleep_and_reboot_for_wpa)
-    t.start()
+    # Kill flask and proceed to start the AP in client mode.
+    shutdown_hook = request.environ.get('werkzeug.server.shutdown')
+    if shutdown_hook is not None:
+        shutdown_hook()
 
     config_hash = config_file_hash()
     return render_template('save_wpa_credentials.html', wpa_enabled=config_hash['wpa_enabled'], wpa_key=config_hash['wpa_key'])
@@ -114,14 +115,14 @@ def create_wpa_supplicant(ssid, wifi_key):
     os.system('mv wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
     os.system('wpa_cli -i wlan0 reconfigure')
 
-    print(subprocess.run(["killall","dnsmasq"]))
-    print(subprocess.run(["killall","hostapd"]))
+    print(subprocess.run(["killall", "dnsmasq"]))
+    print(subprocess.run(["killall", "hostapd"]))
 
     # Remove the static ip address and re-enable wpa_supplicant.
     dhcpcd_config = open('/etc/dhcpcd.conf', 'w')
     dhcpcd_config.write('')
     dhcpcd_config.close()
-    print(subprocess.run(["systemctl","restart","dhcpcd"]))
+    print(subprocess.run(["systemctl", "restart", "dhcpcd"]))
 
 
 def update_wpa(wpa_enabled, wpa_key):
@@ -156,8 +157,11 @@ def config_file_hash():
 if __name__ == '__main__':
     config_hash = config_file_hash()
 
-    if config_hash['ssl_enabled'] == "1":
-        app.run(host='0.0.0.0', port=int(
-            config_hash['server_port']), ssl_context='adhoc')
-    else:
-        app.run(host='0.0.0.0', port=int(config_hash['server_port']))
+    print("starting access point in host mode")
+    manager.start_access_point()
+    print("starting flask")
+    app.run(host='0.0.0.0', port=80)
+    print("stopped flask")
+    print("stopping host mode access point")
+    manager.stop_access_point()
+    print("stopped access point")
