@@ -1,3 +1,4 @@
+from werkzeug.serving import make_server
 from flask import Flask, render_template, request, redirect
 import subprocess
 import os
@@ -7,9 +8,6 @@ import fileinput
 from access_point_manager import AccessPointManager
 
 manager = AccessPointManager()
-
-app = Flask(__name__)
-app.debug = True
 
 
 @app.route('/portal')
@@ -39,9 +37,7 @@ def save_credentials():
     create_wpa_supplicant(ssid, wifi_key)
 
     # Kill flask and proceed to start the AP in client mode.
-    shutdown_hook = request.environ.get('werkzeug.server.shutdown')
-    if shutdown_hook is not None:
-        shutdown_hook()
+    stop_server()
 
     return render_template('save_credentials.html', ssid=ssid)
 
@@ -58,9 +54,7 @@ def save_wpa_credentials():
         update_wpa(0, wpa_key)
 
     # Kill flask and proceed to start the AP in client mode.
-    shutdown_hook = request.environ.get('werkzeug.server.shutdown')
-    if shutdown_hook is not None:
-        shutdown_hook()
+    stop_server()
 
     config_hash = config_file_hash()
     return render_template('save_wpa_credentials.html', wpa_enabled=config_hash['wpa_enabled'], wpa_key=config_hash['wpa_key'])
@@ -162,9 +156,37 @@ def config_file_hash():
 def stop_after_timeout():
     time.sleep(1 * 60)
     print("Timeout reached. Stopping server.")
-    shutdown_hook = request.environ.get('werkzeug.server.shutdown')
-    if shutdown_hook is not None:
-        shutdown_hook()
+    # TODO
+
+
+class ServerThread(threading.Thread):
+
+    def __init__(self, app):
+        threading.Thread.__init__(self)
+        self.srv = make_server('0.0.0.0', 80, app)
+        self.ctx = app.app_context()
+        self.ctx.push()
+
+    def run(self):
+        log.info('starting server')
+        self.srv.serve_forever()
+
+    def shutdown(self):
+        self.srv.shutdown()
+
+
+def start_server():
+    global server
+    app = Flask(__name__)
+    app.debug = True
+    server = ServerThread(app)
+    server.start()
+    server.join()
+
+
+def stop_server():
+    global server
+    server.shutdown()
 
 
 if __name__ == '__main__':
@@ -178,7 +200,7 @@ if __name__ == '__main__':
     print("starting access point in host mode")
     manager.start_access_point()
     print("starting flask")
-    app.run(host='0.0.0.0', port=80)
+    start_server()
     print("stopped flask")
     print("stopping host mode access point")
     manager.stop_access_point()
