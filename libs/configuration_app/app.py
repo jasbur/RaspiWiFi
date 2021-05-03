@@ -35,14 +35,6 @@ def save_credentials():
 
     create_wpa_supplicant(ssid, wifi_key)
 
-    # Call set_ap_client_mode() in a thread otherwise the reboot will prevent
-    # the response from getting to the browser
-    def sleep_and_start_ap():
-        time.sleep(2)
-        set_ap_client_mode()
-    t = Thread(target=sleep_and_start_ap)
-    t.start()
-
     return render_template('save_credentials.html', ssid=ssid)
 
 
@@ -120,17 +112,16 @@ def create_wpa_supplicant(ssid, wifi_key):
     temp_conf_file.close
 
     os.system('mv wpa_supplicant.conf.tmp /etc/wpa_supplicant/wpa_supplicant.conf')
+    os.system('wpa_cli -i wlan0 reconfigure')
 
+    print(subprocess.run(["killall","dnsmasq"]))
+    print(subprocess.run(["killall","hostapd"]))
 
-def set_ap_client_mode():
-    os.system('rm -f /etc/raspiwifi/host_mode')
-    os.system('rm /etc/cron.raspiwifi/aphost_bootstrapper')
-    os.system(
-        'cp /usr/lib/raspiwifi/reset_device/static_files/apclient_bootstrapper /etc/cron.raspiwifi/')
-    os.system('chmod +x /etc/cron.raspiwifi/apclient_bootstrapper')
-    os.system('mv /etc/dnsmasq.conf.original /etc/dnsmasq.conf')
-    os.system('mv /etc/dhcpcd.conf.original /etc/dhcpcd.conf')
-    os.system('reboot now')
+    # Remove the static ip address and re-enable wpa_supplicant.
+    dhcpcd_config = open('/etc/dhcpcd.conf', 'w')
+    dhcpcd_config.write('')
+    dhcpcd_config.close()
+    print(subprocess.run(["systemctl","restart","dhcpcd"]))
 
 
 def update_wpa(wpa_enabled, wpa_key):
