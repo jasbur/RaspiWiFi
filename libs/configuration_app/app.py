@@ -9,6 +9,9 @@ from access_point_manager import AccessPointManager
 
 manager = AccessPointManager()
 
+app = Flask(__name__)
+app.debug = True
+
 
 @app.route('/portal')
 def index():
@@ -177,8 +180,6 @@ class ServerThread(threading.Thread):
 
 def start_server():
     global server
-    app = Flask(__name__)
-    app.debug = True
     server = ServerThread(app)
     server.start()
     server.join()
