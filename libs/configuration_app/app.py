@@ -7,10 +7,29 @@ import threading
 import fileinput
 from access_point_manager import AccessPointManager
 
-manager = AccessPointManager()
+
+class ServerThread(threading.Thread):
+
+    def __init__(self, app):
+        threading.Thread.__init__(self)
+        self.srv = make_server('0.0.0.0', 80, app, threaded=True)
+        self.ctx = app.app_context()
+        self.ctx.push()
+
+    def run(self):
+        print('starting server')
+        self.srv.serve_forever()
+
+    def shutdown(self):
+        print('shutting down server')
+        self.srv.shutdown()
+
 
 app = Flask(__name__)
 app.debug = True
+
+server = ServerThread(app)
+manager = AccessPointManager()
 
 
 @app.route('/portal')
@@ -40,7 +59,7 @@ def save_credentials():
     create_wpa_supplicant(ssid, wifi_key)
 
     # Kill flask and proceed to start the AP in client mode.
-    stop_server()
+    server.shutdown()
 
     return render_template('save_credentials.html', ssid=ssid)
 
@@ -57,7 +76,7 @@ def save_wpa_credentials():
         update_wpa(0, wpa_key)
 
     # Kill flask and proceed to start the AP in client mode.
-    stop_server()
+    server.shutdown()
 
     config_hash = config_file_hash()
     return render_template('save_wpa_credentials.html', wpa_enabled=config_hash['wpa_enabled'], wpa_key=config_hash['wpa_key'])
@@ -159,30 +178,8 @@ def config_file_hash():
 def stop_after_timeout():
     time.sleep(1 * 60)
     print("Timeout reached. Stopping server.")
-    # TODO
-
-
-class ServerThread(threading.Thread):
-
-    def __init__(self, app):
-        threading.Thread.__init__(self)
-        self.srv = make_server('0.0.0.0', 80, app, threaded=True)
-        self.ctx = app.app_context()
-        self.ctx.push()
-
-    def run(self):
-        print('starting server')
-        self.srv.serve_forever()
-
-    def shutdown(self):
-        print('shutting down server')
-        self.srv.shutdown()
-
-
-server = ServerThread(app)
-
-def stop_server():
     server.shutdown()
+
 
 
 if __name__ == '__main__':
