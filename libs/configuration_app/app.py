@@ -4,7 +4,7 @@ import os
 import time
 from threading import Thread
 import fileinput
-import access_point_manager
+from access_point_manager import AccessPointManager
 
 manager = AccessPointManager()
 
