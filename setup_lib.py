@@ -1,5 +1,18 @@
 import os
 
+def install_node():
+    '''
+        This script install node js to the raspberry pi
+    '''
+    os.system('sudo apt-get update')
+    os.system('sudo apt-get upgrade')
+    os.system('wget https://nodejs.org/dist/v14.17.3/node-v14.17.3-linux-armv7l.tar.xz | bash -')
+	os.system('cd node-v14.17.3-linux-armv7l/ && sudo cp -R * /usr/local/')
+    os.system('tar -xzf node-v14.17.3-linux-armv7l.tar.xz')
+
+    os.system('apt-get install -y nodejs')
+    os.system('clear')
+
 def install_prereqs():
 	os.system('clear')
 	os.system('apt update')
