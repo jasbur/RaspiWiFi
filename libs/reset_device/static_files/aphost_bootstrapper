@@ -1,9 +1,9 @@
 #!/bin/bash
 
-python /home/pi/feedtimer_system/configuration_app/rtcTime.py & 
+cd /home/pi/feedtimer_system/configuration_app/ && python rtcTime.py & 
 
-python /home/pi/feedtimer_system/configuration_app/feedTimer.py & 
+cd /home/pi/feedtimer_system/configuration_app/ && python feedTimer.py & 
 
-sudo node /home/pi/feedtimer_system/configuration_app/server/app.js &
+cd /home/pi/feedtimer_system/configuration_app/server/ && sudo node app.js &
 
 hostapd -dd /etc/hostapd/hostapd.conf &
