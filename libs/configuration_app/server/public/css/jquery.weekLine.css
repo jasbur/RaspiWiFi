@@ -1,0 +1,52 @@
+﻿/* weekLine dark css*/
+
+.weekDays a
+{
+    padding: 2px 3px !important;
+    color: rgb(29, 29, 29) !important;
+	background: linear-gradient(to bottom, rgb(214, 214, 214) 0%, #979797 100%) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+    text-decoration: none !important;
+	font-family: "courier new" !important;
+}
+
+.weekDays a:first-child:not(.selectedDay):not(:hover)
+{
+	border-radius: 20% 0 0 20% !important;
+    padding: 2px 3px 2px 6px !important;
+}
+
+.weekDays a:last-child:not(.selectedDay):not(:hover)
+{
+	border-radius: 0 20% 20% 0 !important;
+    padding: 2px 6px 2px 3px !important;
+}
+
+.weekDays a:first-child:hover
+{
+	padding: 2px 1px 2px 4px !important;
+}
+
+.weekDays a:first-child
+{
+	padding: 2px 2px 2px 5px !important;
+}
+
+.weekDays a:hover
+{
+	border-style: solid !important;
+	border-radius: 20% !important;
+	border-width: 2px !important;
+	border-color: #000000 !important;
+    text-decoration: none !important;
+	padding: 2px 1px !important;
+}
+
+.weekDays .selectedDay
+{
+    border-style: solid !important;
+	border-radius: 20% !important;
+	border-width: 1px !important;
+	border-color: rgb(0, 0, 0) !important;
+	color: #232323 !important;
+	padding: 2px !important;
+}

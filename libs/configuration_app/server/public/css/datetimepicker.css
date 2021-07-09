@@ -1,0 +1,34 @@
+﻿.cursorily{ cursor: pointer;}
+.hov:hover{ color: #000;}
+.ico-size{font-size: 16px;}
+.ico-size-month{font-size: 26px!important; line-height: 26px!important;}
+.ico-size-large{ font-size: 40px!important; line-height: 30px;}
+.dtp_main{ border: solid 1px #eee; border-radius: 3px; background-color: #fff; padding: 8px 0 8px 8px;}
+.dtp_main span, .dtp_main i{ display: inline-block; padding-right: 8px;}
+.dtp_modal-win{position: fixed;left: 0; top: 0; width: 100%; height: 100%;
+    z-index: 999; background-color: #eeeeee; opacity: 0.6;}
+.dtp_modal-content{ background-color: #fff; border-radius: 10px; width: 624px;
+    position: absolute; z-index: 1000; top: 100px; left: 100px; font-size: 16px;font-weight: normal;}
+.dtp_modal-content-no-time{ background-color: #fff; border-radius: 10px; width: 312px;
+    position: absolute; z-index: 1000; top: 100px; left: 100px; font-size: 16px;font-weight: normal;}
+.dtp_modal-title{ border-bottom: solid 3px #01adff; padding: 16px 36px; margin-bottom: 16px;  font-size: 22px; }
+.dtp_modal-cell-date{ width: 312px;  float: right; margin-bottom: 22px; margin-top: 6px;}
+.dtp_modal-cell-time{width: 311px; float: left; direction: ltr; border-right: solid 1px #000;}
+.dtp_modal-months{ color: #7d7d7d; text-align: center; font-size: 20px; padding: 0 20px;}
+.dtp_modal-months span{ display: inline-block; padding: 10px 20px; width: 182px;}
+.dtp_modal-calendar{ width: 266px; margin-left: 22px; }
+.dtp_modal-calendar-cell{ width: 38px; padding: 7px 0; display: inline-block; text-align: center;}
+.dtp_modal-colored{ color: #01adff; }
+.dtp_modal-grey{ color: #7d7d7d; }
+.dtp_modal-cell-selected{ background-color: #01adff; border-radius: 48%;  transition: background-color 1s ease-out;}
+.dtp_modal-time-block{ height: 212px; width: 310px; }
+.dpt_modal-button{ background-color: #01adff; color: #fff; font-size: 24px; padding: 8px 40px; float: left;
+    text-align: center; display: inline-block; margin-left: 22px; cursor: pointer; border: solid 1px #fff;
+border-radius: 3px;  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+.dtp_modal-time-line{ text-align: center; color: #7d7d7d; font-size: 20px; padding-top: 15px;  }
+.dtp_modal-time-mechanic{ padding-top: 16px;}
+.dtp_modal-append{ color: #7d7d7d; padding-left: 108px; font-weight: normal; }
+.dtp_modal-midle{ display: inline-block; width: 40px; }
+.dtp_modal-midle-dig{display: inline-block; width: 16px; text-align: center; }
+.dtp_modal-digits{ font-size: 50px; padding-left: 96px;}
+.dtp_modal-digit{  }

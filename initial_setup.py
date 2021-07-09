@@ -35,6 +35,7 @@ install_ans = input("Are you ready to commit changes to the system? [y/N]: ")
 
 if(install_ans.lower() == 'y'):
 	setup_lib.install_prereqs()
+	setup_lib.install_node()
 	setup_lib.copy_configs(wpa_enabled_choice)
 	setup_lib.update_main_config_file(entered_ssid, auto_config_choice, auto_config_delay, ssl_enabled_choice, server_port_choice, wpa_enabled_choice, wpa_entered_key)
 else:
