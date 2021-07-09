@@ -1,17 +1,16 @@
 import os
 
 def install_node():
-    '''
-        This script install node js to the raspberry pi
-    '''
-    os.system('sudo apt-get update')
-    os.system('sudo apt-get upgrade')
-    os.system('wget https://nodejs.org/dist/v14.17.3/node-v14.17.3-linux-armv7l.tar.xz | bash -')
+	'''
+		This script install node js to the raspberry pi
+	'''
+	print("Installing node")
+	os.system('sudo apt-get update')
+	os.system('sudo apt-get upgrade')
+	os.system('wget https://nodejs.org/dist/v14.17.3/node-v14.17.3-linux-armv7l.tar.xz')
+	os.system('tar -xf node-v14.17.3-linux-armv7l.tar.xz')
 	os.system('cd node-v14.17.3-linux-armv7l/ && sudo cp -R * /usr/local/')
-    os.system('tar -xzf node-v14.17.3-linux-armv7l.tar.xz')
-
-    os.system('apt-get install -y nodejs')
-    os.system('clear')
+	os.system('clear')
 
 def install_prereqs():
 	os.system('clear')
@@ -23,6 +22,7 @@ def install_prereqs():
 	print()
 	os.system('pip3 install flask pyopenssl')
 	os.system('clear')
+	install_node()
 
 def copy_configs(wpa_enabled_choice):
 	os.system('mkdir /usr/lib/raspiwifi')
