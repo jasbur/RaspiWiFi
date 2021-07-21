@@ -1,9 +1,14 @@
 import doorSystem as door
 import readData as get
 from time import sleep
+import traceback
+from timeRegister import Time_Register
 
+timeRegisterPath = 'time_register.json'
+time_register = Time_Register(timeRegisterPath)
 workWeek = get.jsonData()
 currentTime = get.currentTime()
+
 
 def checkCycle():
     matchTime = '0:00:00'   # time difference to have for feeding
@@ -18,16 +23,27 @@ def checkCycle():
                 else:
                     print("this is the difference: {}".format(workWeek.compareTimes(currentTime.timeStamp, workWeek.cycleStart[i])))
 
+def registerTime():
+    # get the current time and format 
+    currentTime = time_register.getCurrentTime()
+    # save it into the json file
+    time_register.write(currentTime)
+
 def ifTest():
     if workWeek.testStatus == True:
         door.feed(float(workWeek.testDuration))
         workWeek.writeJson()
 
 while True:
-    currentTime.time()  # read time data
-    workWeek.jsonData() # read json file
-    ifTest()            # if a test status is enabled, this function is executed
-    checkCycle()    # check if cycles are completed this week to open the feeder 
-    sleep(1)    
-    workWeek.cleanDataList()    # clean the list for incoming data
-
+    try:
+        currentTime.time()  # read time data
+        workWeek.jsonData() # read json file
+        ifTest()            # if a test status is enabled, this function is executed
+        checkCycle()    # check if cycles are completed this week to open the feeder 
+        sleep(1)    
+        workWeek.cleanDataList()    # clean the list for incoming data
+    except Exception:
+        var = traceback.format_exc()
+        print(var)
+        print("=======================================")
+        print("")
