@@ -14,6 +14,7 @@ def install_node():
 
 def install_prereqs():
 	os.system('clear')
+	os.system('sudo timedatectl set-timezone UTC') # set time to UTC
 	os.system('apt update')
 	os.system('clear')
 	os.system('apt install python3 python3-rpi.gpio python3-pip dnsmasq hostapd -y')
