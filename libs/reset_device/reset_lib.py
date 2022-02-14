@@ -59,7 +59,7 @@ def update_ssid(ssid_prefix, serial_last_four):
 					print(line, end = '')
 
 		reboot_required = True
-			
+
 	return reboot_required
 
 def is_wifi_active():
