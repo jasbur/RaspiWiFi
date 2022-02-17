@@ -22,49 +22,44 @@ def wpa_check_activate(wpa_enabled, wpa_key):
 			if 'wpa_passphrase' in line:
 				wpa_active = True
 
-	if wpa_enabled == '1' and wpa_active == False:
+	if wpa_enabled and not wpa_active:
 		reboot_required = True
 		os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf.wpa /etc/hostapd/hostapd.conf')
 
-	if wpa_enabled == '1':
-		with fileinput.FileInput('/etc/hostapd/hostapd.conf', inplace=True) as hostapd_conf:
-			for line in hostapd_conf:
-				if 'wpa_passphrase' in line:
-					if 'wpa_passphrase=' + wpa_key not in line:
-						print('wpa_passphrase=' + wpa_key)
-						os.system('reboot')
-					else:
-						print(line, end = '')
-				else:
-					print(line, end = '')
-
-	if wpa_enabled == '0' and wpa_active == True:
+	if not wpa_enabled and wpa_active:
 		reboot_required = True
 		os.system('cp /usr/lib/raspiwifi/reset_device/static_files/hostapd.conf.nowpa /etc/hostapd/hostapd.conf')
+
+	if wpa_enabled:
+		with fileinput.FileInput('/etc/hostapd/hostapd.conf', inplace=True) as hostapd_conf:
+			for line in hostapd_conf:
+				if 'wpa_passphrase=' + wpa_key not in line:
+					print('wpa_passphrase=' + wpa_key)
+				else:
+					print(line, end = '')
 
 	return reboot_required
 
 def update_ssid(ssid_prefix, serial_last_four):
 	reboot_required = False
 	ssid_correct = False
+	ssid = ssid_prefix + "_" + serial_last_four
 
 	with open('/etc/hostapd/hostapd.conf') as hostapd_conf:
 		for line in hostapd_conf:
-			if ssid_prefix in line:
+			if ssid in line:
 				ssid_correct = True
 
 	if ssid_correct == False:
 		with fileinput.FileInput("/etc/hostapd/hostapd.conf", inplace=True) as file:
 			for line in file:
 				if 'ssid=' in line:
-					line_array = line.split('=')
-					line_array[1] = ssid_prefix + ' ' + serial_last_four
-					print(line_array[0] + '=' + line_array[1])
+					print('ssid=' + ssid)
 				else:
 					print(line, end = '')
 
 		reboot_required = True
-			
+
 	return reboot_required
 
 def is_wifi_active():

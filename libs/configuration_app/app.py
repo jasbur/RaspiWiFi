@@ -33,7 +33,7 @@ def save_credentials():
     wifi_key = request.form['wifi_key']
 
     create_wpa_supplicant(ssid, wifi_key)
-    
+
     # Call set_ap_client_mode() in a thread otherwise the reboot will prevent
     # the response from getting to the browser
     def sleep_and_start_ap():
@@ -116,17 +116,16 @@ def set_ap_client_mode():
 def update_wpa(wpa_enabled, wpa_key):
     with fileinput.FileInput('/etc/raspiwifi/raspiwifi.conf', inplace=True) as raspiwifi_conf:
         for line in raspiwifi_conf:
+            updated = False
             if 'wpa_enabled=' in line:
-                line_array = line.split('=')
-                line_array[1] = wpa_enabled
-                print(line_array[0] + '=' + str(line_array[1]))
+                print('wpa_enabled=' + str(wpa_enabled))
+                updated = True
 
             if 'wpa_key=' in line:
-                line_array = line.split('=')
-                line_array[1] = wpa_key
-                print(line_array[0] + '=' + line_array[1])
+                print('wpa_key=' + wpa_key)
+                updated = True
 
-            if 'wpa_enabled=' not in line and 'wpa_key=' not in line:
+            if not updated:
                 print(line, end='')
 
 
