@@ -31,8 +31,12 @@ def set_wifi_credentials(ssid, password):
         with open("/etc/wpa_supplicant/wpa_supplicant.conf", "a") as wpafile:
             wpafile.write(config_data)
 
+        t = Thread(target=os.system, args=("reboot",))
+        t.start()
+
         return True
     except Exception as e:
+        print(e)
         return False
 
 
