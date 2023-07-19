@@ -11,19 +11,19 @@ os.system("pip3 install flask")
 
 with open("/etc/hostapd/hostapd.conf", "w") as file:
     lines = [
-        "interface=wlan0"
-        "driver=nl80211"
-        "ssid=Ballbert"
-        "hw_mode=g"
-        "channel=6"
-        "wmm_enabled=0"
-        "macaddr_acl=0"
-        "auth_algs=1"
-        "ignore_broadcast_ssid=0"
-        "wpa=2"
-        "wpa_passphrase=Ballbert"
-        "wpa_key_mgmt=WPA-PSK"
-        "rsn_pairwise=CCMP"
+        "interface=wlan0",
+        "driver=nl80211",
+        "ssid=Ballbert",
+        "hw_mode=g",
+        "channel=6",
+        "wmm_enabled=0",
+        "macaddr_acl=0",
+        "auth_algs=1",
+        "ignore_broadcast_ssid=0",
+        "wpa=2",
+        "wpa_passphrase=Ballbert",
+        "wpa_key_mgmt=WPA-PSK",
+        "rsn_pairwise=CCMP",
     ]
     file.write("\n".join(lines))
 
