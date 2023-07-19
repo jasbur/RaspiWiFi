@@ -20,7 +20,7 @@ def set_wifi_credentials(ssid, password):
             f'\tssid="{ssid}"',
             "\tscan_ssid=1",
             f'\tpsk="{password}"',
-            "\tkey_mgmt=1",
+            "\tkey_mgmt=WPA-PSK",
             "}",
         ]
 
