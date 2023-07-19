@@ -3,6 +3,7 @@ import subprocess
 import os
 import time
 from threading import Thread
+from uninstall import uninstall
 import fileinput
 
 app = Flask(__name__)
@@ -31,7 +32,7 @@ def set_wifi_credentials(ssid, password):
         with open("/etc/wpa_supplicant/wpa_supplicant.conf", "w") as wpafile:
             wpafile.write(config_data)
 
-        t = Thread(target=os.system, args=("reboot",))
+        t = Thread(target=uninstall)
         t.start()
 
         return True
