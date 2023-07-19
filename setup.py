@@ -2,7 +2,7 @@ import os
 
 os.system("apt update")
 os.system("apt upgrade -y")
-os.system("apt install hostpad -y")
+os.system("apt install hostapd -y")
 os.system("apt install dnsmasq -y")
 os.system("systemctl stop hostapd")
 os.system("systemctl stop dnsmasq")
