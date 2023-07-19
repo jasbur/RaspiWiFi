@@ -9,7 +9,7 @@ os.system("systemctl stop dnsmasq")
 os.system("apt install python3-pip -y")
 os.system("pip3 install flask")
 
-with open("/etc/hostapd/hostapd.conf", "x") as file:
+with open("/etc/hostapd/hostapd.conf", "w") as file:
     lines = [
         "interface=wlan0"
         "driver=nl80211"
