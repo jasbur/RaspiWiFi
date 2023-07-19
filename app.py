@@ -43,13 +43,19 @@ def set_wifi_credentials(ssid, password):
 
 @app.route("/save_credentials", methods=["GET", "POST"])
 def save_credentials():
-    ssid = request.form["ssid"]
-    wifi_key = request.form["wifi_key"]
+    ssid = request.json["ssid"]
+    wifi_key = request.json["wifi_key"]
 
     if set_wifi_credentials(ssid, wifi_key):
         return {"status": "success", "status_code": 200}
     else:
         return {"status": "failed", "status_code": 500}
+
+
+@app.route("/connected", methods=["GET", "POST"])
+def conncected():
+    response = {"status_code": 200}
+    return response
 
 
 if __name__ == "__main__":
