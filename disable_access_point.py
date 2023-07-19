@@ -1,7 +1,7 @@
 import os
 
 
-def uninstall():
+def disable_access_point():
     os.system("systemctl disable dnsmasq")
     os.system("systemctl disableg hostapd")
 
@@ -12,5 +12,4 @@ def uninstall():
 
 
 if __name__ == "__main__":
-    uninstall()
-    print("Uninstalling...")
+    disable_access_point()

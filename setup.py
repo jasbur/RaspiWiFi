@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 os.system("apt update")
 os.system("apt upgrade -y")
@@ -9,21 +10,21 @@ os.system("systemctl stop dnsmasq")
 os.system("apt install python3-pip -y")
 os.system("pip3 install flask")
 
+serial_last_four = subprocess.check_output(["cat", "/proc/cpuinfo"])[-5:-1].decode(
+    "utf-8"
+)
+
+
 with open("/etc/hostapd/hostapd.conf", "w") as file:
     lines = [
         "interface=wlan0",
         "driver=nl80211",
-        "ssid=Ballbert",
+        f"ssid=Device {serial_last_four}",
         "hw_mode=g",
         "channel=6",
         "wmm_enabled=0",
         "macaddr_acl=0",
-        "auth_algs=1",
         "ignore_broadcast_ssid=0",
-        "wpa=2",
-        "wpa_passphrase=Ballbert",
-        "wpa_key_mgmt=WPA-PSK",
-        "rsn_pairwise=CCMP",
     ]
     file.write("\n".join(lines))
 
@@ -42,7 +43,7 @@ with open("/etc/dnsmasq.conf", "a") as file:
         "domain-needed",
         "bogus-priv",
         "dhcp-range=192.168.50.150,192.168.50.200,255.255.255.0,12h",
-        "address=/setup.ballbert.com/10.0.0.1",
+        "address=/setup.com/192.168.50.10",
     ]
     file.write("\n".join(lines))
 
