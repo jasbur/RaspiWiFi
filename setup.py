@@ -54,4 +54,6 @@ with open("/etc/dhcpcd.conf", "a") as file:
     ]
     file.write("\n".join(lines))
 
+os.system("*connmanctl enable wifi")
+
 os.system("reboot")
