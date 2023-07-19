@@ -32,7 +32,7 @@ def set_wifi_credentials(ssid, password):
             wpafile.write(config_data)
 
         return True
-    except:
+    except Exception as e:
         return False
 
 
