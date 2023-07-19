@@ -25,7 +25,7 @@ with open("/etc/hostapd/hostapd.conf", "w") as file:
         "wpa_key_mgmt=WPA-PSK"
         "rsn_pairwise=CCMP"
     ]
-    file.write(lines.join("\n"))
+    file.write("\n".join(lines))
 
 os.system("systemctl unmask hostapd")
 os.system("systemctl enable hostapd")
@@ -41,7 +41,7 @@ with open("/etc/dnsmasq.conf", "a") as file:
         "dhcp-range=192.168.50.150,192.168.50.200,255.255.255.0,12h",
         "address=/setup.ballbert.com/10.0.0.1",
     ]
-    file.write(lines.join("\n"))
+    file.write("\n".join(lines))
 
 os.system("cp /etc/dhcpcd.conf /etc/dhcpcd.conf.copy")
 
@@ -52,6 +52,6 @@ with open("/etc/dhcpcd.conf", "a") as file:
         "static ip_address=192.168.50.10/24",
         "static routers=192.168.50.1",
     ]
-    file.write(lines.join("\n"))
+    file.write("\n".join(lines))
 
 os.system("reboot")
