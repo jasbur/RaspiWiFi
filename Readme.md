@@ -4,31 +4,33 @@ OTA Wifi Configuration is a program to headlessly configure a Raspberry Pi's WiF
 connection using using any other WiFi-enabled device (much like the way
 a Chromecast or similar device can be configured).
 
-### RaspiWiFi has been tested with
+### OTA Wifi Configuration has been tested with
 
 -   Raspberry Pi 4b Running Raspberry Pi Os Buster Lite
 
-### RaspiWiFi should work with
+### OTA Wifi Configuration should work with
 
 -   Any rasberry Pi running Raspberry Pi Os Buster or Bullseye
 
 ## Installation Instructions:
 
--   Navigate to the directory where you downloaded or cloned RaspiWiFi
+-   Navigate to the directory where you downloaded or cloned OTA Wifi Configuration
 
 -   Run: `sudo python3 setup.py`, **Must be run with sudo or as root**
 
 -   This script will install all necessary prerequisites and copy all necessary
-    config and library files, then reboot. When it finishes booting it should
+    config and library files, then reboot.
+-   Wait for it to finish booting then go back to the directory that you cloned or downloaded OTA Wifi Configuration and run `sudo python3 app.py`
+-   It should
     present itself in _Configuration Mode_ as a WiFi access point with the
     name **Device [xxxx]**. The Xs being replaced with the last four digits of your raspberry pi's serial number.
 
 ## Usage:
 
--   Connect to the "Device [xxxx] Setup" access point using any other WiFi enabled
+-   Connect to the **Device [xxxx]** access point using any other WiFi enabled
     device.
 
--   Make an http request to [**192.168.50.10**] or [**setup.com**] on port 80
+-   Make an http request to [**192.168.50.10**] or [**setup.com**] on port 5000
 
 ## Api:
 
