@@ -9,7 +9,3 @@ def disable_access_point():
     os.system("sudo cp /etc/dhcpcd.conf.copy /etc/dhcpcd.conf")
 
     os.system("reboot")
-
-
-if __name__ == "__main__":
-    disable_access_point()
