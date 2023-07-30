@@ -1,4 +1,0 @@
-interface=wlan0
-driver=nl80211
-ssid=temp-ssid
-channel=1
